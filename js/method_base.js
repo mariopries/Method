@@ -4,7 +4,7 @@ window.onload = () => {
 };
 function CarregaScripts() {
 
-    let scripts = [
+    let scriptsBase = [
         //-- Bibliotecas externas
 
         "shared/method/js/jquery.cropit.js",
@@ -33,6 +33,15 @@ function CarregaScripts() {
 
         //--------------------------------
     ];
+    let scriptsAuditor;
+    let scriptsPosto;
+
+
+    let scripts = {
+        base: scriptsBase,
+        posto: scriptsPosto,
+        wauditor: scriptsAuditor
+    }
 
     let footer = document.createElement("footer");
 
@@ -40,10 +49,10 @@ function CarregaScripts() {
 
     document.body.appendChild(footer);
 
-    for (let i = 0; i < scripts.length; i++) {
+    for (let i = 0; i < scripts.base.length; i++) {
         let scriptTag = document.createElement("script");
         scriptTag.type = "text/javascript";
-        scriptTag.src = scripts[i];
+        scriptTag.src = scripts.base[i];
 
         document.body.lastElementChild.appendChild(scriptTag);
     }
