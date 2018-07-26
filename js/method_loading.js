@@ -84,11 +84,14 @@ let Menu = {
         let content = document.getElementById("TABLECONTENT_MPAGE");
         let title = document.getElementById("TEXTBLOCKTITLE_MPAGE")
             .parentElement;
-        let footer = document.getElementById("TABLEFOOTER_MPAGE").parentElement;
-        let largura = sidebar.offsetWidth;
-        content.style.setProperty("margin-left", `${largura}px`);
-        title.style.setProperty("margin-left", `${largura}px`);
-        footer.style.setProperty("padding-left", `${largura + 15}px`);
+        if (sidebar && content && title) {
+            let footer = document.getElementById("TABLEFOOTER_MPAGE")
+                .parentElement;
+            let largura = sidebar.offsetWidth;
+            content.style.setProperty("margin-left", `${largura}px`);
+            title.style.setProperty("margin-left", `${largura}px`);
+            footer.style.setProperty("padding-left", `${largura + 15}px`);
+        }
     },
     Cycle() {
         Menu.Resize();
