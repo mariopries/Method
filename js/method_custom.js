@@ -1,4 +1,5 @@
 // AESTHETHIC
+//--TESTE 1234
 
 Method_Custom = class {
     LoadVariable(varName) {
