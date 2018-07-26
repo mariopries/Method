@@ -1,0 +1,30 @@
+.page-sidebar .sidebar-menu .submenu > li .submenu > li > a:before {
+    border-style: solid;
+    border-width: 1px;
+    left: 33px;
+    position: absolute;
+    top: 13px;
+    z-index: 2;
+    height: 8px;
+    width: 8px;
+    display: inline-block;
+    content: "";
+    border-radius: 8px;
+    background-color: #103b13;
+    border-bottom-color: #889097;
+    border-left-color: #889097;
+    border-right-color: #889097;
+    border-top-color: #889097;
+}
+
+page-sidebar .sidebar-menu .submenu > li .submenu > li.active > a:before {
+    background-color: #5cb85c;
+    border-bottom-color: #5cb85c;
+    border-left-color: #5cb85c;
+    border-right-color: #5cb85c;
+    border-top-color: #5cb85c;
+    filter: blur(1px);
+}
+.page-content {
+    transition-duration: 1000ms;
+}
