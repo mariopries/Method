@@ -1,3 +1,5 @@
+// AESTHETHIC
+
 Method_Custom = class {
     LoadVariable(varName) {
         varValue = window[varName];
