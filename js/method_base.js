@@ -3,7 +3,7 @@ window.onload = () => {
     CarregaStyles();
     Scripts.AppendScripts();
 };
-
+//--Teste
 class Method_Scripts {
     constructor() {
         this.scripts = [
