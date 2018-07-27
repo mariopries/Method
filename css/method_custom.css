@@ -46,3 +46,47 @@ i.fas.fa-cog.config-button-header {
 i.fas.fa-cog.config-button-header:hover {
     background-color: #002700;
 }
+
+.sidebar-config {
+    width: 0px;
+    height: calc(100vh - 50px);
+    background-color: rgb(230, 230, 230);
+    box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.5);
+    position: absolute;
+    right: 0;
+    top: 50px;
+    z-index: 1001;
+    text-decoration: unset;
+    transition-duration: .25s !important;
+    overflow-y: hidden;
+}
+.sidebar-config > ul {
+    margin: 0;
+    padding: 0;
+    padding-top: 20px;
+    list-style-type: none;
+    text-decoration: unset;
+    color: rgb(0, 51, 0);
+    overflow: hidden;
+}
+.sidebar-config> ul > li {
+    width: 100%;
+    line-height: 44px;
+    max-height: 44px;
+    padding-left: 15px;
+    text-decoration: none;
+    list-style: unset;
+    font-size: 14px;
+    font-weight: 700;
+    overflow: hidden;
+}
+.sidebar-config> ul :hover {
+    background-color: rgb(116, 116, 116);
+    color: white;
+    text-decoration: none;
+}
+
+.config-switch {
+    padding-top: 10px;
+    margin-left: 10px;
+}

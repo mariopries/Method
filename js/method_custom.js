@@ -1,3 +1,7 @@
+//-- Classes de objetos externos Method_Custom
+
+//-- Method_Custom
+
 Method_Custom = class {
     LoadVariable(varName) {
         varValue = window[varName];
@@ -150,9 +154,13 @@ Method_Custom = class {
     }
 };
 
+//--Method_Avatar
+
 Method_Avatar = class {
 
-    ImageBase64;
+    constructor() {
+        this.ImageBase64;
+    }
 
     Start() {
         let ConstroiTela = () => {
