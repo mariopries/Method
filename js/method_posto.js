@@ -1,9 +1,10 @@
 window.onload = () => {
     let Scripts = new Method_Scripts;
-    CarregaStyles();
+    let Styles = new Method_Styles;
+    Styles.AppendStyles();
     Scripts.AppendScripts();
 };
-
+//--Teste
 class Method_Scripts {
     constructor() {
         this.scripts = [
@@ -52,17 +53,23 @@ class Method_Scripts {
     }
 };
 
-function CarregaStyles() {
-    let styles = [
-        "shared/method/css/method_custom.css",
-        "shared/method/css/teste.css"
-    ];
+class Method_Styles {
+    constructor(){
+        this.styles = [
+            "shared/method/css/method_custom.css",
+            "shared/method/css/teste.css"
+        ];
+    }
 
-    for (let i = 0; i < styles.length; i++) {
-        let style = document.createElement("link");
-        style.href = styles[i];
-        style.type = "text/css";
-        style.rel = "stylesheet";
-        document.head.appendChild(style);
+    AppendStyles(){
+
+        for (let i = 0; i < this.styles.length; i++) {
+            let style = document.createElement("link");
+            style.href = this.styles[i];
+            style.type = "text/css";
+            style.rel = "stylesheet";
+            document.head.appendChild(style);
+        }
+
     }
 }
