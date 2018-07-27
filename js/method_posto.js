@@ -4,7 +4,7 @@ window.onload = () => {
     Styles.AppendStyles();
     Scripts.AppendScripts();
 };
-//--Teste
+//--Testessss
 class Method_Scripts {
     constructor() {
         this.scripts = [
