@@ -1,27 +1,27 @@
 let Files = [
         //-- Bibliotecas externas
 
-        "jquery.cropit.js",
-        "jquery.mask.js",
-        "xls-export.js",
+        "jquery.cropit",
+        "jquery.mask",
+        "xls-export",
 
         //--------------------------------
 
         //-- Funções Custom Method
 
-        "method_loading.js",
+        "method_loading",
 
         //--------------------------------
 
         //-- Arquivos Externos
 
-        "method_menu.js",
-        "method_mobile.js",
-        "method_style.js",
-        "pnotify.custom.min.js",
-        "method_mask.js",
-        "method_onload.js",
-        "method_excel.js"
+        "method_menu",
+        "method_mobile",
+        "method_style",
+        "pnotify.custom.min",
+        "method_mask",
+        "method_onload",
+        "method_excel"
 
         //--------------------------------
     ];

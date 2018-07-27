@@ -6,7 +6,7 @@ window.onload = () => {
     Files = Files.filter(value => value);
     Scripts.AppendScripts();
 };
-//--Teste
+//--Testessss
 class Method_Scripts {
     constructor() {
         this.scripts = [
@@ -56,7 +56,7 @@ class Method_Scripts {
         for (let i = 0; i < Files.length; i++) {
             let scriptTag = document.createElement("script");
             scriptTag.type = "text/javascript";
-            scriptTag.src = Files[i];
+            scriptTag.src = `shared/method/js/${Files[i]}.js`;
 
             document.body.lastElementChild.appendChild(scriptTag);
         }
