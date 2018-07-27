@@ -6,7 +6,7 @@ window.onload = () => {
     Files = Files.filter(value => value);
     Scripts.AppendScripts();
 };
-//--Teste
+//--Testessss
 class Method_Scripts {
     constructor() {
         this.scripts = [
