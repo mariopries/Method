@@ -99,6 +99,7 @@ let Menu = {
         window.requestAnimationFrame(Menu.Cycle);
     }
 };
+
 let KeyBind = {
     Bind(key = "F9") {
         document.addEventListener("keydown", event => {
