@@ -4,10 +4,14 @@ window.onload = () => {
     Scripts.AppendScripts();
 };
 //--Teste
+<<<<<<< HEAD
 class Method_Scripts {
     constructor() {
         this.scripts = [
             //-- Bibliotecas externas
+=======
+function CarregaScripts() {
+>>>>>>> 3b97dbd6b41c7afb10c4db33c5bf29e382e716a8
 
             "shared/method/js/jquery.cropit.js",
             "shared/method/js/jquery.mask.js",
