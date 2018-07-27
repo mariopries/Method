@@ -2,6 +2,7 @@ window.onload = () => {
     CarregaStyles();
     CarregaScripts();
 };
+//--Teste
 function CarregaScripts() {
 
     let scripts = [
