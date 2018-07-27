@@ -1,6 +1,7 @@
 window.onload = () => {
     let Scripts = new Method_Scripts;
-    CarregaStyles();
+    let Styles = new Method_Styles;
+    Styles.AppendStyles();
     Scripts.AppendScripts();
 };
 //--Teste
