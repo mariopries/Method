@@ -52,23 +52,17 @@ class Method_Scripts {
     }
 };
 
-class Method_Styles {
-    constructor(){
-        this.styles = [
-            "shared/method/css/method_custom.css",
-            "shared/method/css/teste.css"
-        ];
-    }
+function CarregaStyles() {
+    let styles = [
+        "shared/method/css/method_custom.css",
+        "shared/method/css/teste.css"
+    ];
 
-    AppendStyles(){
-
-        for (let i = 0; i < this.styles.length; i++) {
-            let style = document.createElement("link");
-            style.href = this.styles[i];
-            style.type = "text/css";
-            style.rel = "stylesheet";
-            document.head.appendChild(style);
-        }
-
+    for (let i = 0; i < styles.length; i++) {
+        let style = document.createElement("link");
+        style.href = styles[i];
+        style.type = "text/css";
+        style.rel = "stylesheet";
+        document.head.appendChild(style);
     }
 }

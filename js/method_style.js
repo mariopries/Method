@@ -58,7 +58,9 @@ class Config {
     Trigger() {
         let sideconfig = document.getElementById('config-bar');
         let content = document.getElementById('TABLECONTENT_MPAGE').parentElement;
+        let footer = document.getElementById("TABLEFOOTER_MPAGE").parentElement;
         content.style.transitionDuration = '.25s';
+        footer.style.transitionDuration = '.25s';
 
         CollapseExpand()
 
@@ -66,10 +68,12 @@ class Config {
             if (sideconfig.style.width === '0px' || !sideconfig.style.width){
                 sideconfig.style.width = '250px'
                 content.style.paddingRight = '265px';
+                footer.style.paddingRight = '265px';
                 // setTimeout(ChangeName('sidebar-config expanded'),2500);
             } else {
                 sideconfig.style.width = '0px';
                 content.style.paddingRight = '15px';
+                footer.style.paddingRight = '15px';
                 // setTimeout(ChangeName('sidebar-config collapsed'),2500);
             }
         }
