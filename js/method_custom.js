@@ -2,7 +2,10 @@
 
 //-- Method_Custom
 
+controle = false;
+
 Method_Custom = class {
+
     LoadVariable(varName) {
         varValue = window[varName];
         return varValue;
@@ -150,14 +153,15 @@ Method_Custom = class {
     }
 
     PNotify(msgnotify) {
+
         eval(msgnotify);
+
     }
 };
 
 //--Method_Avatar
 
 Method_Avatar = class {
-
     constructor() {
         this.ImageBase64;
         this.Start();

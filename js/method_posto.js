@@ -6,14 +6,12 @@ window.onload = () => {
     Files = Files.filter(value => value);
     Scripts.AppendScripts();
 };
-//--Testessss
+
 class Method_Scripts {
     constructor() {
         this.scripts = [
-
-        //-- Exclusão de arquivos
-        //-- Para rejeitar os arquivos indesejados, utilizar a syntax "nome_arquivo",
-
+            //-- Exclusão de arquivos
+            //-- Para rejeitar os arquivos indesejados, utilizar a syntax "nome_arquivo",
         ];
     }
 
@@ -44,7 +42,6 @@ class Method_Scripts {
             let scriptTag = document.createElement("script");
             scriptTag.type = "text/javascript";
             scriptTag.src = `shared/method/js/${Files[i]}.js`;
-
             document.body.lastElementChild.appendChild(scriptTag);
         }
     }
