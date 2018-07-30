@@ -18,7 +18,7 @@ let Files = [
         //-- Arquivos Externos
         "method_menu",
         "method_mobile",
-        "method_style",        
+        "method_config_bar",        
         "method_mask",
         "method_onload",
         "method_excel",
