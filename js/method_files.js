@@ -1,4 +1,6 @@
 let Files = [
+
+    [
         //-- Bibliotecas que sejam utilizadas em arquivos externos para o genexus como o method_custom
         //-- Que utiliza o pnotify e o croppit, são necessário carregar no próprio genexus.
         //-- Causa do problema: Variáveis externas do genexus, executam antes do evento start da página.
@@ -21,5 +23,9 @@ let Files = [
         "method_onload",
         "method_excel",
         "method_ajax"
-
+    ],
+    [
+        "shared/method/css/method_custom.css",
+        "shared/method/css/switches.css"
+    ]
     ];
