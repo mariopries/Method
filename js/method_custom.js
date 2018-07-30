@@ -160,6 +160,7 @@ Method_Avatar = class {
 
     constructor() {
         this.ImageBase64;
+        this.Start();
     }
 
     Start() {
