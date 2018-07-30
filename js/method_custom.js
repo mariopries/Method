@@ -4,7 +4,7 @@
 
 controle = false;
 
-Method_Custom = class {
+let Method_Custom = class {
 
     LoadVariable(varName) {
         varValue = window[varName];

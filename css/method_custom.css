@@ -50,7 +50,7 @@ i.fas.fa-cog.config-button-header:hover {
 .sidebar-config {
     width: 0px;
     height: calc(100vh - 50px);
-    background-color: rgb(230, 230, 230);
+    background-color: #dadada;
     box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.5);
     position: absolute;
     right: 0;
@@ -60,6 +60,7 @@ i.fas.fa-cog.config-button-header:hover {
     transition-duration: .25s !important;
     overflow: hidden;
 }
+
 .sidebar-config > ul {
     margin: 0;
     padding: 0;
