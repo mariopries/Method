@@ -1,12 +1,18 @@
 //-- Variáveis
 let lastFocused, EmpresaIdJavaScript;
 //OBJETOS
+
+//-- Funções para serem utilizadas nos arquivos JS externos
 let Method = {
+
+    //-- Função de uso geral para converter letras do alfabeto no número correspondente às mesmas
     ConvertToLetters(num) {
         var arr = "abcdefghijklmnopqrstuvwxyz".split("");
         var resultado = arr[num + 1] ? arr[num + 1].toUpperCase() : 0;
         return resultado;
     },
+
+    //-- Função para validar o evento isValid no Genexus (O evento do Genexus se aplica apenas no momento em que o campo é alterado)
     BlurValidation() {
         let currentIndex,
             lastIndex = 0,
@@ -32,12 +38,16 @@ let Method = {
             lastId = event.target.id;
         });
     },
+
+    //-- Função que corrige a interação com focus nos prompts em Web Panels, fazendo o focus ir para o próximo campo
     FixPrompts() {
         let prompts = $(".Method-PromptBtn");
         for (let i = 0; i < prompts.length; i++) {
             prompts[i].tabIndex = 1;
         }
     },
+
+    //-- Função que altera o Id das empresas utilizando o combo box na navbar
     ChangeEmpresaId(EmpresaIdValue) {
         EmpresaIdJavaScript = EmpresaIdValue;
         gx.O.MasterPage.clearMessages();
@@ -62,6 +72,8 @@ let Method = {
         );
     }
 };
+
+//-- Funções relacionadas ao Menu Lateral
 let Menu = {
     Collapse() {
         ucSidebar.Collapse();
@@ -73,12 +85,16 @@ let Menu = {
         ucSidebar.CollapseExpand();
     },
     get visible() {
-        ucSidebar.Visible;
+        ucSidebar.Visible; //--Retorna um boolean
     },
+
+    //-- Corrige o tamanho da área visível do menu ao redimensionar a tela
     FixHeight() {
         let sidebar_ul = document.getElementById("sidebar_ul");
         sidebar_ul.style.setProperty("height", `${window.innerHeight - 186}px`);
     },
+
+    //-- Corrige a responsividade da tela conforme o menu se adapta (É chamada pelo método Cycle)
     Resize() {
         let sidebar = document.getElementById("sidebar");
         let content = document.getElementById("TABLECONTENT_MPAGE");
@@ -93,6 +109,7 @@ let Menu = {
             footer.style.setProperty("padding-left", `${largura + 15}px`);
         }
     },
+    //-- Corrige a responsividade da página uma vez por frame
     Cycle() {
         Menu.Resize();
         Menu.FixHeight();
@@ -100,6 +117,8 @@ let Menu = {
     }
 };
 
+
+//-- Funções utilizadas para remapeamento de atalhos do teclado
 let KeyBind = {
     Bind(key = "F9") {
         document.addEventListener("keydown", event => {
@@ -152,6 +171,8 @@ let KeyBind = {
         });
     }
 };
+
+//-- Funções de mask dos campos dos formulários
 let Mask = {
     Load() {
         $("body").on("focusout", ":input", function() {

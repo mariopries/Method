@@ -12,7 +12,6 @@ class Method_Scripts {
         this.scripts = [
             //-- Bibliotecas externas
 
-            "pnotify.custom.min",
             "pace-config",
             "pace",
 
