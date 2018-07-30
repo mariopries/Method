@@ -58,7 +58,7 @@ i.fas.fa-cog.config-button-header:hover {
     z-index: 1001;
     text-decoration: unset;
     transition-duration: .25s !important;
-    overflow-y: hidden;
+    overflow: hidden;
 }
 .sidebar-config > ul {
     margin: 0;
@@ -67,7 +67,6 @@ i.fas.fa-cog.config-button-header:hover {
     list-style-type: none;
     text-decoration: unset;
     color: rgb(0, 51, 0);
-    overflow: hidden;
 }
 .sidebar-config> ul > li {
     width: 100%;
@@ -76,9 +75,8 @@ i.fas.fa-cog.config-button-header:hover {
     padding-left: 15px;
     text-decoration: none;
     list-style: unset;
-    font-size: 14px;
+    font-size: 12px;
     font-weight: 700;
-    overflow: hidden;
 }
 .sidebar-config> ul :hover {
     background-color: rgb(116, 116, 116);
@@ -89,4 +87,16 @@ i.fas.fa-cog.config-button-header:hover {
 .config-switch {
     padding-top: 10px;
     margin-left: 10px;
+}
+
+.sidebar-config > ul > li > .btn-group {
+    margin-left: 10px;
+    z-index: 1002;
+}
+.sidebar-config > ul > li > .btn-group :hover {
+    background-color: rgb(24, 90, 35);
+}
+
+.sidebar-config > ul > li > .btn-group > ul > li {
+    z-index: 1002;
 }
