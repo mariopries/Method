@@ -1,12 +1,16 @@
 //-- Variáveis
 let lastFocused, EmpresaIdJavaScript;
 //OBJETOS
+
+//-- Funções de uso geral para os arquivos .JS externos
 let Method = {
+    //-- Converte letras em números
     ConvertToLetters(num) {
         var arr = "abcdefghijklmnopqrstuvwxyz".split("");
         var resultado = arr[num + 1] ? arr[num + 1].toUpperCase() : 0;
         return resultado;
     },
+    //-- Ativa um evento isValid personalizado para ser recebido no Genexus através do evento Method_Custom.blurCampo
     BlurValidation() {
         let currentIndex,
             lastIndex = 0,
@@ -32,12 +36,14 @@ let Method = {
             lastId = event.target.id;
         });
     },
+    //-- Faz o foco nunca ficar nos prompts
     FixPrompts() {
         let prompts = $(".Method-PromptBtn");
         for (let i = 0; i < prompts.length; i++) {
             prompts[i].tabIndex = 1;
         }
     },
+    //-- Troca de empresa utilizando o menu da navbar (WAUDITOR)
     ChangeEmpresaId(EmpresaIdValue) {
         EmpresaIdJavaScript = EmpresaIdValue;
         gx.O.MasterPage.clearMessages();
@@ -62,6 +68,8 @@ let Method = {
         );
     }
 };
+
+//-- Funções que dizem respeito à sidebar
 let Menu = {
     Collapse() {
         ucSidebar.Collapse();
@@ -73,12 +81,14 @@ let Menu = {
         ucSidebar.CollapseExpand();
     },
     get visible() {
-        ucSidebar.Visible;
+        ucSidebar.Visible; //-- Retorna um boolean
     },
+    //-- Corrige a altura da área visível do menu
     FixHeight() {
         let sidebar_ul = document.getElementById("sidebar_ul");
         sidebar_ul.style.setProperty("height", `${window.innerHeight - 186}px`);
     },
+    //-- Corrige a margem dos elementos da tela em relação ao menu
     Resize() {
         let sidebar = document.getElementById("sidebar");
         let content = document.getElementById("TABLECONTENT_MPAGE");
@@ -93,6 +103,7 @@ let Menu = {
             footer.style.setProperty("padding-left", `${largura + 15}px`);
         }
     },
+    //-- Chama as funções que corrigem a tela e o menu 60 vezes por segundo
     Cycle() {
         Menu.Resize();
         Menu.FixHeight();
@@ -100,6 +111,7 @@ let Menu = {
     }
 };
 
+//-- Funções que travalham com os atalhos do teclado
 let KeyBind = {
     Bind(key = "F9") {
         document.addEventListener("keydown", event => {
@@ -152,6 +164,8 @@ let KeyBind = {
         });
     }
 };
+
+//-- Funções para o mask dos campos dos formulários
 let Mask = {
     Load() {
         $("body").on("focusout", ":input", function() {
