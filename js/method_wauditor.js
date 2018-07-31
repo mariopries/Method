@@ -1,3 +1,5 @@
+import { Files } from "./method_files";
+
 window.onload = () => {
     let Scripts = new Method_Scripts();
     let Styles = new Method_Styles();
@@ -9,7 +11,7 @@ window.onload = () => {
     Scripts.AppendScripts();
 };
 
-class Method_Scripts {
+export class Method_Scripts {
     constructor() {
         this.scripts = [
             //-- Bibliotecas externas
@@ -64,7 +66,7 @@ class Method_Scripts {
     }
 }
 
-class Method_Styles {
+export class Method_Styles {
     constructor() {
         this.styles = [
             //-- Inserir os styles que não devem ser inclusos

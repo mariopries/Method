@@ -104,7 +104,7 @@ i.fas.fa-cog.config-button-header:hover {
 
 .config-input {
     max-width: 60%;
-    position: relative;
+    float: right;
     height: 40px;
     padding: 5px 5px;
 }
