@@ -4,7 +4,6 @@ let lastFocused, EmpresaIdJavaScript;
 
 //-- Funções para serem utilizadas nos arquivos JS externos
 let Method = {
-
     //-- Função de uso geral para converter letras do alfabeto no número correspondente às mesmas
     ConvertToLetters(num) {
         var arr = "abcdefghijklmnopqrstuvwxyz".split("");
@@ -18,25 +17,28 @@ let Method = {
             lastIndex = 0,
             lastId,
             mapaFormulario = new Array();
-        $("body").on("focus", "input, select", event => {
-            currentIndex = event.target.gxIndex;
-            if (currentIndex > lastIndex) {
-                mapaFormulario = $("input, select");
-                let objs = mapaFormulario.filter(index => {
-                    let answer =
-                        mapaFormulario[index].gxIndex < currentIndex &&
-                        mapaFormulario[index].gxIndex >= lastIndex;
-                    return answer;
-                });
-                let objIds = objs.map(index => {
-                    let answer = objs[index].id;
-                    return answer;
-                });
-                gx.fx.obs.notify("Method_Custom.blurCampo", [objIds]);
-            }
-            lastIndex = event.target.gxIndex;
-            lastId = event.target.id;
-        });
+
+        document.querySelectorAll("input, select").forEach(value =>
+            value.addEventListener("focus", event => {
+                currentIndex = event.target.gxIndex;
+                if (currentIndex > lastIndex) {
+                    mapaFormulario = $("input, select");
+                    let objs = mapaFormulario.filter(index => {
+                        let answer =
+                            mapaFormulario[index].gxIndex < currentIndex &&
+                            mapaFormulario[index].gxIndex >= lastIndex;
+                        return answer;
+                    });
+                    let objIds = objs.map(index => {
+                        let answer = objs[index].id;
+                        return answer;
+                    });
+                    gx.fx.obs.notify("Method_Custom.blurCampo", [objIds]);
+                }
+                lastIndex = event.target.gxIndex;
+                lastId = event.target.id;
+            })
+        );
     },
 
     //-- Função que corrige a interação com focus nos prompts em Web Panels, fazendo o focus ir para o próximo campo
@@ -116,7 +118,6 @@ let Menu = {
         window.requestAnimationFrame(Menu.Cycle);
     }
 };
-
 
 //-- Funções utilizadas para remapeamento de atalhos do teclado
 let KeyBind = {
