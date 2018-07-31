@@ -19,9 +19,7 @@ class Method_Scripts {
 
     RemoveScripts(value) {
         let achou = false;
-        console.log(value);
         for (let i = 0; i < this.scripts.length; i++) {
-            console.log("filtro");
             if (this.scripts[i] === value) {
                 achou = true;
                 break;
