@@ -26,6 +26,7 @@ class Method_Scripts {
             //-- Arquivos Externos
 
             "method_ajax",
+            "method_config_bar"
             //--------------------------------
         ];
     }
@@ -56,7 +57,7 @@ class Method_Scripts {
             
 
             if (Files[0][i] === 'method_config_bar') {
-                scriptTag.type = "module";
+                // scriptTag.type = "module";
             } else {
                 scriptTag.type = "text/javascript";
             }

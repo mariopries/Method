@@ -1,31 +1,42 @@
-export class Config {
+class Config {
 
     Load(items) {
-        this.items = items;
+        this.items = JSON.parse(items);
         let sideConfig = document.createElement("div");
         sideConfig.className = "sidebar-config";
         sideConfig.id = "config-bar";
         sideConfig.innerHTML = this.Build();
         document.body.appendChild(sideConfig);
         Config.ButtonToggle("btnConfig1");
+        Config.EnableButton();
     }
 
     Build() {
         let rawHTML = "<ul>";
         for (let i = 0; i < this.items.length; i++) {
-            rawHTML += "<li>" + Config.BuildSwitch(this.items[i]) + "</li>";
+            rawHTML += "<li>"
+            switch (this.items[i].Type) {
+                case 'SW':
+                    rawHTML += Config.BuildSwitch(this.items[i]);
+                    break;
+                
+                case 'CB':
+                    rawHTML += Config.BuildCombo(this.items[i]);
+                    break;
+
+                case 'BI':
+                    rawHTML += Config.BuildInput(this.items[i]);
+                    break;
+            }
+            rawHTML += "</li>";
         }
-        rawHTML +=
-            "<li>" +
-            Config.BuildCombo({ icon: "fas fa-cog", title: "Teste Combo" }) +
-            "</li>";
         rawHTML += "</ul>";
         return rawHTML;
     }
 
     static BuildSwitch(item) {
-        return `<i class="menu-icon ${item.icon}"></i>
-                <span>&ThickSpace;${item.title}</span>
+        return `<i class="menu-icon ${item.Icon}"></i>
+                <span>&ThickSpace;${item.Name}</span>
                 <label class="switch switch-label switch-pill switch-success switch-sm float-right config-switch">
                     <input type="checkbox" class="switch-input" checked>
                     <span class="switch-slider" data-checked="On" data-unchecked="Off"></span>
@@ -33,8 +44,8 @@ export class Config {
     }
 
     static BuildCombo(item) {
-        return `<i class="menu-icon ${item.icon}"></i>
-                <span>&ThickSpace;${item.title}</span>
+        return `<i class="menu-icon ${item.Icon}"></i>
+                <span>&ThickSpace;${item.Name}</span>
                 <div class="btn-group" dropdown placement="bottom right" ng-reflect-placement="bottom right">
                     <button id="btnConfig1" class="btn btn-success dropdown-toggle config-btn" dropdowntoggle="" type="button" aria-haspopup="true" aria-expanded="false">
                         Grupo
@@ -52,6 +63,16 @@ export class Config {
                         </li>
                     </ul>
                 </div>`;
+    }
+
+    static BuildInput(item) {
+
+        return `<i class="menu-icon ${item.Icon}"></i>
+                <span>&ThickSpace;${item.Name}</span>
+                <div class="config-input">
+                    <input type="text" class="form-control" placeholder="${item.Name}">
+                </div>`
+
     }
 
     static ButtonToggle(buttonId) {
@@ -100,5 +121,9 @@ export class Config {
         content.style.paddingRight = "15px";
         footer.style.paddingRight = "15px";
         // setTimeout(ChangeName('sidebar-config collapsed'),2500);
+    }
+
+    static EnableButton() {
+        document.getElementById("SHOWCONFIG_MPAGE").onclick = Config.Trigger;
     }
 }
