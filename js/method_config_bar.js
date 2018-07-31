@@ -17,7 +17,7 @@ export class Config {
         }
         rawHTML +=
             "<li>" +
-            Config.BuildCombo({ icon: "fas fa-cog", title: "Config 6" }) +
+            Config.BuildCombo({ icon: "fas fa-cog", title: "Teste Combo" }) +
             "</li>";
         rawHTML += "</ul>";
         return rawHTML;
@@ -42,13 +42,13 @@ export class Config {
                     </button>
                     <ul class="dropdown-menu dropdown-menu-right" role="menu" style="left: auto; right: 0px;">
                         <li role="menuitem">
-                            <a class="dropdown-item" href="#">Action</a>
+                            <a class="dropdown-item" href="#">Grupo 1</a>
                         </li>
                         <li role="menuitem">
-                            <a class="dropdown-item" href="#">Another action</a>
+                            <a class="dropdown-item" href="#">Grupo 2</a>
                         </li>
                         <li role="menuitem">
-                            <a class="dropdown-item" href="#">Something else here</a>
+                            <a class="dropdown-item" href="#">Grupo 3</a>
                         </li>
                     </ul>
                 </div>`;
@@ -101,15 +101,4 @@ export class Config {
         footer.style.paddingRight = "15px";
         // setTimeout(ChangeName('sidebar-config collapsed'),2500);
     }
-}
-if (document.getElementById("SHOWCONFIG_MPAGE")) {
-    let sc = new Config();
-    sc.Load([
-        {
-            title: 'Teste',
-            icon: 'fas fa-cog'
-        }
-    ]);
-    // document.getElementById("MAINFORM").onclick = Config.Collapse;
-    document.getElementById("SHOWCONFIG_MPAGE").onclick = Config.Trigger;
 }

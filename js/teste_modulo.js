@@ -1,3 +1,13 @@
 import { Config } from "./method_config_bar.js";
 
-let sc2 = new Config();
+if (document.getElementById("SHOWCONFIG_MPAGE")) {
+    let sc = new Config();
+    sc.Load([
+        {
+            title: 'Teste Switch',
+            icon: 'fas fa-cog'
+        }
+    ]);
+    // document.getElementById("MAINFORM").onclick = Config.Collapse;
+    document.getElementById("SHOWCONFIG_MPAGE").onclick = Config.Trigger;
+}
