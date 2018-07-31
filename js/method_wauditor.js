@@ -1,4 +1,4 @@
-import { Files } from "./method_files";
+import { Files } from "./method_files.js";
 
 window.onload = () => {
     let Scripts = new Method_Scripts();
