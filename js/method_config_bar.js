@@ -7,7 +7,10 @@ class Config {
         sideConfig.id = "config-bar";
         sideConfig.innerHTML = this.Build();
         document.body.appendChild(sideConfig);
-        Config.ButtonToggle("btnConfig1");
+        let buttons = this.items.filter( value => value.Type === 'CB' );
+        buttons.forEach( value => {
+            Config.ButtonToggle(`btnConfig${value.Id}`);
+        })
         Config.EnableButton();
     }
 
@@ -47,7 +50,7 @@ class Config {
         return `<i class="menu-icon ${item.Icon}"></i>
                 <span>&ThickSpace;${item.Name}</span>
                 <div class="btn-group" dropdown placement="bottom right" ng-reflect-placement="bottom right">
-                    <button id="btnConfig1" class="btn btn-success dropdown-toggle config-btn" dropdowntoggle="" type="button" aria-haspopup="true" aria-expanded="false">
+                    <button id="btnConfig${item.Id}" class="btn btn-success dropdown-toggle config-btn" dropdowntoggle="" type="button" aria-haspopup="true" aria-expanded="false">
                         Grupo
                         <span class="caret"></span>
                     </button>

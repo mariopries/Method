@@ -92,14 +92,13 @@ i.fas.fa-cog.config-button-header:hover {
 
 .sidebar-config > ul > li > .btn-group {
     margin-left: 10px;
-    z-index: 1002;
 }
-.sidebar-config > ul > li > .btn-group :hover {
+.sidebar-config > ul > li > .btn-group > button :hover {
     background-color: rgb(24, 90, 35);
 }
 
 .sidebar-config > ul > li > .btn-group > ul > li {
-    z-index: 1002;
+    z-index: 1003;
 }
 
 .config-input {
