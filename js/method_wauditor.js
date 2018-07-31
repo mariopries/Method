@@ -55,12 +55,7 @@ class Method_Scripts {
         for (let i = 0; i < Files[0].length; i++) {
             let scriptTag = document.createElement("script");
             
-
-            if (Files[0][i] === 'method_config_bar') {
-                // scriptTag.type = "module";
-            } else {
-                scriptTag.type = "text/javascript";
-            }
+            scriptTag.type = "text/javascript";
             
             scriptTag.src = `shared/method/js/${Files[0][i]}.js`;
 
