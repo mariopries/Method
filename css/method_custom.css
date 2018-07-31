@@ -52,12 +52,12 @@ i.fas.fa-cog.config-button-header:hover {
     height: calc(100vh - 50px);
     background-color: #dadada;
     box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.5);
-    position: absolute;
+    position: fixed;
     right: 0;
     top: 50px;
     z-index: 1001;
     text-decoration: unset;
-    transition-duration: .25s !important;
+    transition-duration: 0.25s !important;
     overflow: hidden;
 }
 
@@ -69,7 +69,7 @@ i.fas.fa-cog.config-button-header:hover {
     text-decoration: unset;
     color: rgb(0, 51, 0);
 }
-.sidebar-config> ul > li {
+.sidebar-config > ul > li {
     width: 100%;
     line-height: 44px;
     max-height: 44px;
@@ -79,7 +79,7 @@ i.fas.fa-cog.config-button-header:hover {
     font-size: 12px;
     font-weight: 700;
 }
-.sidebar-config> ul :hover {
+.sidebar-config > ul > :hover, not .sidebar-config > ul > * :hover {
     background-color: rgb(116, 116, 116);
     color: white;
     text-decoration: none;
@@ -92,12 +92,22 @@ i.fas.fa-cog.config-button-header:hover {
 
 .sidebar-config > ul > li > .btn-group {
     margin-left: 10px;
-    z-index: 1002;
 }
-.sidebar-config > ul > li > .btn-group :hover {
+.sidebar-config > ul > li > .btn-group > button :hover {
     background-color: rgb(24, 90, 35);
 }
 
 .sidebar-config > ul > li > .btn-group > ul > li {
-    z-index: 1002;
+    z-index: 1003;
+}
+
+.config-input {
+    max-width: 60%;
+    float: right;
+    height: 40px;
+    padding: 5px 5px;
+}
+
+.config-input :hover {
+    background-color: #fff;
 }

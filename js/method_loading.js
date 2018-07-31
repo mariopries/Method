@@ -16,25 +16,28 @@ let Method = {
             lastIndex = 0,
             lastId,
             mapaFormulario = new Array();
-        $("body").on("focus", "input, select", event => {
-            currentIndex = event.target.gxIndex;
-            if (currentIndex > lastIndex) {
-                mapaFormulario = $("input, select");
-                let objs = mapaFormulario.filter(index => {
-                    let answer =
-                        mapaFormulario[index].gxIndex < currentIndex &&
-                        mapaFormulario[index].gxIndex >= lastIndex;
-                    return answer;
-                });
-                let objIds = objs.map(index => {
-                    let answer = objs[index].id;
-                    return answer;
-                });
-                gx.fx.obs.notify("Method_Custom.blurCampo", [objIds]);
-            }
-            lastIndex = event.target.gxIndex;
-            lastId = event.target.id;
-        });
+
+        document.querySelectorAll("input, select").forEach(value =>
+            value.addEventListener("focus", event => {
+                currentIndex = event.target.gxIndex;
+                if (currentIndex > lastIndex) {
+                    mapaFormulario = $("input, select");
+                    let objs = mapaFormulario.filter(index => {
+                        let answer =
+                            mapaFormulario[index].gxIndex < currentIndex &&
+                            mapaFormulario[index].gxIndex >= lastIndex;
+                        return answer;
+                    });
+                    let objIds = objs.map(index => {
+                        let answer = objs[index].id;
+                        return answer;
+                    });
+                    gx.fx.obs.notify("Method_Custom.blurCampo", [objIds]);
+                }
+                lastIndex = event.target.gxIndex;
+                lastId = event.target.id;
+            })
+        );
     },
     //-- Faz o foco nunca ficar nos prompts
     FixPrompts() {

@@ -1,3 +1,5 @@
+import { Files } from "./method_files.js";
+
 window.onload = () => {
     let Scripts = new Method_Scripts();
     let Styles = new Method_Styles();
@@ -9,7 +11,7 @@ window.onload = () => {
     Scripts.AppendScripts();
 };
 
-class Method_Scripts {
+export class Method_Scripts {
     constructor() {
         this.scripts = [
             //-- Bibliotecas externas
@@ -26,6 +28,7 @@ class Method_Scripts {
             //-- Arquivos Externos
 
             "method_ajax",
+            "method_config_bar"
             //--------------------------------
         ];
     }
@@ -54,12 +57,7 @@ class Method_Scripts {
         for (let i = 0; i < Files[0].length; i++) {
             let scriptTag = document.createElement("script");
             
-
-            if (Files[0][i] === 'method_config_bar') {
-                scriptTag.type = "module";
-            } else {
-                scriptTag.type = "text/javascript";
-            }
+            scriptTag.type = "text/javascript";
             
             scriptTag.src = `shared/method/js/${Files[0][i]}.js`;
 
@@ -68,7 +66,7 @@ class Method_Scripts {
     }
 }
 
-class Method_Styles {
+export class Method_Styles {
     constructor() {
         this.styles = [
             //-- Inserir os styles que não devem ser inclusos
