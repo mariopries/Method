@@ -66,7 +66,16 @@ let Method = {
             false,
             false
         );
+    },
+    //Verifica se um determinado elemento existe e retorna boolean
+    ExistVar(value){
+        return !!value;
+    },
+
+    ExistId(id){
+        return !!document.getElementById(id);
     }
+    
 };
 
 //-- Funções que dizem respeito à sidebar
@@ -86,18 +95,20 @@ let Menu = {
     //-- Corrige a altura da área visível do menu
     FixHeight() {
         let sidebar_ul = document.getElementById("sidebar_ul");
-        sidebar_ul.style.setProperty("height", `${window.innerHeight - 186}px`);
+        if(sidebar_ul){
+            sidebar_ul.style.setProperty("height", `${window.innerHeight - 186}px`);
+        }
     },
     //-- Corrige a margem dos elementos da tela em relação ao menu
     Resize() {
-        let sidebar = document.getElementById("sidebar");
-        let content = document.getElementById("TABLECONTENT_MPAGE");
-        let title = document.getElementById("TEXTBLOCKTITLE_MPAGE")
-            .parentElement;
-        if (sidebar && content && title) {
-            let footer = document.getElementById("TABLEFOOTER_MPAGE")
-                .parentElement;
+        if (Method.ExistId("sidebar") && Method.ExistId("TABLECONTENT_MPAGE") && Method.ExistId("TEXTBLOCKTITLE_MPAGE")) {
+            
+            let sidebar = document.getElementById("sidebar");
+            let content = document.getElementById("TABLECONTENT_MPAGE");
+            let title = document.getElementById("TEXTBLOCKTITLE_MPAGE").parentElement;        
+            let footer = document.getElementById("TABLEFOOTER_MPAGE").parentElement;
             let largura = sidebar.offsetWidth;
+
             content.style.setProperty("margin-left", `${largura}px`);
             title.style.setProperty("margin-left", `${largura}px`);
             footer.style.setProperty("padding-left", `${largura + 15}px`);
@@ -152,7 +163,7 @@ let KeyBind = {
             } else if (
                 this.parentNode.parentNode.nodeName == "DIV" &&
                 this === document.activeElement &&
-                this.nextSibling != undefined
+                this.nextSibling
             ) {
                 if (this.nextSibling.className == "input-group-btn") {
                     this.addEventListener("keydown", Transaction);
