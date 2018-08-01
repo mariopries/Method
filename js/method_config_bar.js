@@ -1,33 +1,38 @@
-class Config {
+Config = class {
+    constructor() {
+        document.getElementById("method_config_bar_script").remove();
+    }
 
     Load(items) {
-        this.items = JSON.parse(items);
-        let sideConfig = document.createElement("div");
-        sideConfig.className = "sidebar-config";
-        sideConfig.id = "config-bar";
-        sideConfig.innerHTML = this.Build();
-        document.body.appendChild(sideConfig);
-        let buttons = this.items.filter( value => value.Type === 'CB' );
-        buttons.forEach( value => {
-            Config.ButtonToggle(`btnConfig${value.Id}`);
-        })
-        Config.EnableButton();
+        if (!document.getElementById("config-bar")) {
+            this.items = JSON.parse(items);
+            let sideConfig = document.createElement("div");
+            sideConfig.className = "sidebar-config";
+            sideConfig.id = "config-bar";
+            sideConfig.innerHTML = this.Build();
+            document.body.appendChild(sideConfig);
+            let buttons = this.items.filter(value => value.Type === "CB");
+            buttons.forEach(value => {
+                Config.ButtonToggle(`btnConfig${value.Id}`);
+            });
+            Config.EnableButton();
+        }
     }
 
     Build() {
         let rawHTML = "<ul>";
         for (let i = 0; i < this.items.length; i++) {
-            rawHTML += "<li>"
+            rawHTML += "<li>";
             switch (this.items[i].Type) {
-                case 'SW':
+                case "SW":
                     rawHTML += Config.BuildSwitch(this.items[i]);
                     break;
-                
-                case 'CB':
+
+                case "CB":
                     rawHTML += Config.BuildCombo(this.items[i]);
                     break;
 
-                case 'BI':
+                case "BI":
                     rawHTML += Config.BuildInput(this.items[i]);
                     break;
             }
@@ -50,7 +55,9 @@ class Config {
         return `<i class="menu-icon ${item.Icon}"></i>
                 <span>&ThickSpace;${item.Name}</span>
                 <div class="btn-group" dropdown placement="bottom right" ng-reflect-placement="bottom right">
-                    <button id="btnConfig${item.Id}" class="btn btn-success dropdown-toggle config-btn" dropdowntoggle="" type="button" aria-haspopup="true" aria-expanded="false">
+                    <button id="btnConfig${
+                        item.Id
+                    }" class="btn btn-success dropdown-toggle config-btn" dropdowntoggle="" type="button" aria-haspopup="true" aria-expanded="false">
                         Grupo
                         <span class="caret"></span>
                     </button>
@@ -69,13 +76,13 @@ class Config {
     }
 
     static BuildInput(item) {
-
         return `<i class="menu-icon ${item.Icon}"></i>
                 <span>&ThickSpace;${item.Name}</span>
                 <div class="config-input">
-                    <input type="text" class="form-control" placeholder="${item.Name}">
-                </div>`
-
+                    <input type="text" class="form-control" placeholder="${
+                        item.Name
+                    }">
+                </div>`;
     }
 
     static ButtonToggle(buttonId) {
@@ -96,12 +103,11 @@ class Config {
         let footer = document.getElementById("TABLEFOOTER_MPAGE").parentElement;
         content.style.transitionDuration = ".25s";
         footer.style.transitionDuration = ".25s";
-        if (sideconfig.style.width === '0px' || !sideconfig.style.width) {
+        if (sideconfig.style.width === "0px" || !sideconfig.style.width) {
             Config.Expand();
         } else {
             Config.Collapse();
         }
-        
     }
 
     static Expand() {

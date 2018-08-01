@@ -93,7 +93,9 @@ let Menu = {
     //-- Corrige o tamanho da área visível do menu ao redimensionar a tela
     FixHeight() {
         let sidebar_ul = document.getElementById("sidebar_ul");
-        sidebar_ul.style.setProperty("height", `${window.innerHeight - 186}px`);
+        sidebar_ul.style.setProperty("height", `calc(100vh - 186px)`);
+        let slimScrollDiv = document.querySelectorAll('.slimScrollDiv');
+        slimScrollDiv.forEach(value => value.style.setProperty("height", `auto`));
     },
 
     //-- Corrige a responsividade da tela conforme o menu se adapta (É chamada pelo método Cycle)
