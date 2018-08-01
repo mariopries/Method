@@ -98,9 +98,9 @@ let Menu = {
     //-- Corrige a altura da área visível do menu
     FixHeight() {
         let sidebar_ul = document.getElementById("sidebar_ul");
-        if(sidebar_ul){
-            sidebar_ul.style.setProperty("height", `${window.innerHeight - 186}px`);
-        }
+        sidebar_ul.style.setProperty("height", `calc(100vh - 186px)`);
+        let slimScrollDiv = document.querySelectorAll('.slimScrollDiv');
+        slimScrollDiv.forEach(value => value.style.setProperty("height", `auto`));
     },
     //-- Corrige a margem dos elementos da tela em relação ao menu
     Resize() {
