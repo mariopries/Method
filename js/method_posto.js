@@ -1,3 +1,5 @@
+import { Files } from "./method_files.js";
+
 window.onload = () => {
     let Scripts = new Method_Scripts();
     let Styles = new Method_Styles();
@@ -45,7 +47,7 @@ class Method_Scripts {
             document.body.lastElementChild.appendChild(scriptTag);
         }
     }
-}
+};
 
 class Method_Styles {
     constructor() {
@@ -77,4 +79,4 @@ class Method_Styles {
             document.head.appendChild(style);
         }
     }
-}
+};
