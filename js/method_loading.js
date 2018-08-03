@@ -1,5 +1,7 @@
+//@ts-check
+
 //-- Variáveis
-let lastFocused, EmpresaIdJavaScript;
+let lastFocused;
 //OBJETOS
 
 //-- Funções para serem utilizadas nos arquivos JS externos
@@ -15,27 +17,31 @@ let Method = {
     BlurValidation() {
         let currentIndex,
             lastIndex = 0,
+            // @ts-ignore
             lastId,
             mapaFormulario = new Array();
 
         document.querySelectorAll("input, select").forEach(value =>
             value.addEventListener("focus", event => {
+                // @ts-ignore
                 currentIndex = event.target.gxIndex;
                 if (currentIndex > lastIndex) {
+                    // @ts-ignore
                     mapaFormulario = $("input, select");
                     let objs = mapaFormulario.filter(index => {
-                        let answer =
-                            mapaFormulario[index].gxIndex < currentIndex &&
-                            mapaFormulario[index].gxIndex >= lastIndex;
+                        let answer = mapaFormulario[index].gxIndex < currentIndex && mapaFormulario[index].gxIndex >= lastIndex;
                         return answer;
                     });
                     let objIds = objs.map(index => {
                         let answer = objs[index].id;
                         return answer;
                     });
+                    // @ts-ignore
                     gx.fx.obs.notify("Method_Custom.blurCampo", [objIds]);
                 }
+                // @ts-ignore
                 lastIndex = event.target.gxIndex;
+                // @ts-ignore
                 lastId = event.target.id;
             })
         );
@@ -43,6 +49,7 @@ let Method = {
 
     //-- Função que corrige a interação com focus nos prompts em Web Panels, fazendo o focus ir para o próximo campo
     FixPrompts() {
+        // @ts-ignore
         let prompts = $(".Method-PromptBtn");
         for (let i = 0; i < prompts.length; i++) {
             prompts[i].tabIndex = 1;
@@ -51,50 +58,37 @@ let Method = {
 
     //-- Função que altera o Id das empresas utilizando o combo box na navbar
     ChangeEmpresaId(EmpresaIdValue) {
-        EmpresaIdJavaScript = EmpresaIdValue;
-        gx.O.MasterPage.clearMessages();
-        gx.O.MasterPage.AV90EmpresaIdJS = gx.num.trunc(
-            gx.O.MasterPage.AV31Javascript.LoadVariable("EmpresaIdJavaScript"),
-            0
-        );
-        gx.O.MasterPage.refreshOutputs([
-            {
-                av: "AV90EmpresaIdJS",
-                fld: "vEMPRESAIDJS_MPAGE",
-                pic: "ZZZZZZZZZ9",
-                nv: 0
-            }
-        ]);
-        gx.O.MasterPage.executeServerEvent(
-            "COMMIT_MPAGE",
-            true,
-            null,
-            false,
-            false
-        );
+        // @ts-ignore
+        gx.fx.obs.notify("Method_Custom.ChangeEmpresa", [EmpresaIdValue]);
     }
 };
 
 //-- Funções relacionadas ao Menu Lateral
 let Menu = {
     Collapse() {
+        // @ts-ignore
         ucSidebar.Collapse();
     },
     Expand() {
+        // @ts-ignore
         ucSidebar.Expand();
     },
     CollapseExpand() {
+        // @ts-ignore
         ucSidebar.CollapseExpand();
     },
     get visible() {
-        ucSidebar.Visible; //--Retorna um boolean
+        // @ts-ignore
+        return ucSidebar.Visible; //--Retorna um boolean
     },
 
     //-- Corrige o tamanho da área visível do menu ao redimensionar a tela
     FixHeight() {
         let sidebar_ul = document.getElementById("sidebar_ul");
+        let slimScrollDiv = document.querySelectorAll(".slimScrollDiv");
+
         sidebar_ul.style.setProperty("height", `calc(100vh - 186px)`);
-        let slimScrollDiv = document.querySelectorAll('.slimScrollDiv');
+        // @ts-ignore
         slimScrollDiv.forEach(value => value.style.setProperty("height", `auto`));
     },
 
@@ -102,11 +96,9 @@ let Menu = {
     Resize() {
         let sidebar = document.getElementById("sidebar");
         let content = document.getElementById("TABLECONTENT_MPAGE");
-        let title = document.getElementById("TEXTBLOCKTITLE_MPAGE")
-            .parentElement;
+        let title = document.getElementById("TEXTBLOCKTITLE_MPAGE").parentElement;
         if (sidebar && content && title) {
-            let footer = document.getElementById("TABLEFOOTER_MPAGE")
-                .parentElement;
+            let footer = document.getElementById("TABLEFOOTER_MPAGE").parentElement;
             let largura = sidebar.offsetWidth;
             content.style.setProperty("margin-left", `${largura}px`);
             title.style.setProperty("margin-left", `${largura}px`);
@@ -126,13 +118,8 @@ let KeyBind = {
     Bind(key = "F9") {
         document.addEventListener("keydown", event => {
             if (event.key === key) {
-                if (
-                    document.getElementById("BTNINSERT") ||
-                    document.getElementById("BTNINSERTTESTE")
-                ) {
-                    let objeto = document.getElementById("BTNINSERT")
-                        ? document.getElementById("BTNINSERT")
-                        : document.getElWWementById("BTNINSERTTESTE");
+                if (document.getElementById("BTNINSERT") || document.getElementById("BTNINSERTTESTE")) {
+                    let objeto = document.getElementById("BTNINSERT") ? document.getElementById("BTNINSERT") : document.getElementById("BTNINSERTTESTE");
                     objeto.click();
                 }
             }
@@ -153,22 +140,17 @@ let KeyBind = {
             }
         }
 
+        // @ts-ignore
         $("body").on("focus", ".AttributeRealWidth", function() {
-            if (
-                this.parentNode.parentNode.nodeName == "TD" &&
-                this === document.activeElement
-            ) {
+            if (this.parentNode.parentNode.nodeName === "TD" && this === document.activeElement) {
                 this.addEventListener("keydown", WebPanel);
-            } else if (
-                this.parentNode.parentNode.nodeName == "DIV" &&
-                this === document.activeElement &&
-                this.nextSibling != undefined
-            ) {
-                if (this.nextSibling.className == "input-group-btn") {
+            } else if (this.parentNode.parentNode.nodeName === "DIV" && this === document.activeElement && this.nextSibling) {
+                if (this.nextSibling.className === "input-group-btn") {
                     this.addEventListener("keydown", Transaction);
                 }
             }
         });
+        // @ts-ignore
         $("body").on("focusout", ".AttributeRealWidth", function() {
             this.removeEventListener("keydown", WebPanel);
         });
@@ -178,81 +160,70 @@ let KeyBind = {
 //-- Funções de mask dos campos dos formulários
 let Mask = {
     Load() {
+        // @ts-ignore
         $("body").on("focusout", ":input", function() {
             lastFocused = this;
         });
+        // @ts-ignore
         $(window).bind("beforeunload", function() {
+            // @ts-ignore
             if (!$(".gx-mask")[0]) {
+                // @ts-ignore
                 $("body").append("<div class='gx-mask'></div>");
             }
         });
     },
     IE() {
         let condition = (field, uf) => {
-            if (
-                document.getElementById("span_EMPRESACIDADEESTADOID") ||
-                document.getElementById(
-                    "span_PARTICIPANTE_PARTICIPANTEESTADOID"
-                )
-            ) {
+            if (document.getElementById("span_EMPRESACIDADEESTADOID") || document.getElementById("span_PARTICIPANTE_PARTICIPANTEESTADOID")) {
                 uf = document.getElementById("span_EMPRESACIDADEESTADOID")
-                    ? document.getElementById("span_EMPRESACIDADEESTADOID")
-                          .innerText
-                    : document.getElementById(
-                          "span_PARTICIPANTE_PARTICIPANTEESTADOID"
-                      ).innerText;
+                    ? document.getElementById("span_EMPRESACIDADEESTADOID").innerText
+                    : document.getElementById("span_PARTICIPANTE_PARTICIPANTEESTADOID").innerText;
             }
-            if (uf == "AP" || uf == "AL") {
+            if (uf === "AP" || uf === "AL") {
                 field.mask("AAAAAAAAA");
-            } else if (
-                uf == "ES" ||
-                uf == "MA" ||
-                uf == "MS" ||
-                uf == "PB" ||
-                uf == "PI" ||
-                uf == "RR" ||
-                uf == "SE"
-            ) {
+            } else if (uf === "ES" || uf === "MA" || uf === "MS" || uf === "PB" || uf === "PI" || uf === "RR" || uf === "SE") {
                 field.mask("AAAAAAAA-A");
-            } else if (uf == "SC") {
+            } else if (uf === "SC") {
                 field.mask("AAA.AAA.AAA");
-            } else if (uf == "AM" || uf == "GO" || uf == "RN") {
+            } else if (uf === "AM" || uf === "GO" || uf === "RN") {
                 field.mask("AA.AAA.AAA-A");
-            } else if (uf == "AC") {
+            } else if (uf === "AC") {
                 field.mask("AA.AAA.AAA/AAA-AA");
-            } else if (uf == "BA") {
+            } else if (uf === "BA") {
                 field.mask("BAAAAAA-AA");
-            } else if (uf == "CE") {
+            } else if (uf === "CE") {
                 field.mask("AAAAAAAA-AA");
-            } else if (uf == "DF") {
+            } else if (uf === "DF") {
                 field.mask("AAAAAAAAAAA-AA");
-            } else if (uf == "MT" || uf == "TO") {
+            } else if (uf === "MT" || uf === "TO") {
                 field.mask("AAAAAAAAAA-A");
-            } else if (uf == "MG") {
+            } else if (uf === "MG") {
                 field.mask("AAA.AAA.AAA/AAAA");
-            } else if (uf == "PA") {
+            } else if (uf === "PA") {
                 field.mask("AA-AAAAAA-A");
-            } else if (uf == "PR") {
+            } else if (uf === "PR") {
                 field.mask("AAA.AAAAA.AA");
-            } else if (uf == "PE") {
+            } else if (uf === "PE") {
                 field.mask("AAAAAAA-AA");
-            } else if (uf == "RJ") {
+            } else if (uf === "RJ") {
                 field.mask("AA.AAA.AA-A");
-            } else if (uf == "RS") {
+            } else if (uf === "RS") {
                 field.mask("AAA/AAAAAAA");
-            } else if (uf == "RO") {
+            } else if (uf === "RO") {
                 field.mask("AAAAAAAAAAAAA-A");
-            } else if (uf == "SP") {
+            } else if (uf === "SP") {
                 field.mask("AAA.AAA.AAA.AAA");
             }
         };
 
-        let ie = this;
-
+        // @ts-ignore
         $("body").on("focus", ".MaskIE", function() {
             let uf;
+            // @ts-ignore
             let field = $(this).find("input");
             if (field[0].value.length <= 1) {
+                // @ts-ignore
                 field.on("keyup", event => {
                     if (field[0].value.match("[0-9]+$")) {
                         condition(field, uf);
@@ -268,20 +239,29 @@ let Mask = {
         });
     },
     DateTime() {
+        // @ts-ignore
         $("body").on("focus", ".MaskDateTime", function() {
+            // @ts-ignore
             field = $(this).find("input");
+            // @ts-ignore
             field.mask("00/00/0000 00:00");
         });
     },
     Date() {
+        // @ts-ignore
         $("body").on("focus", ".MaskDate", function() {
+            // @ts-ignore
             field = $(this).find("input");
+            // @ts-ignore
             field.mask("00/00/0000");
         });
     },
     Placa() {
+        // @ts-ignore
         $("body").on("focus", ".MaskPlaca", function() {
+            // @ts-ignore
             field = $(this).find("input");
+            // @ts-ignore
             field.mask("SSS-0000", {
                 translation: {
                     S: { pattern: /[A-Za-z]/ },
@@ -294,31 +274,45 @@ let Mask = {
         });
     },
     CEP() {
+        // @ts-ignore
         $("body").on("focus", ".MaskCep", function() {
+            // @ts-ignore
             field = $(this).find("input");
+            // @ts-ignore
             field.mask("00000-000");
         });
     },
     CNPJ() {
+        // @ts-ignore
         $("body").on("focus", ".MaskCNPJ", function() {
+            // @ts-ignore
             field = $(this).find("input");
+            // @ts-ignore
             field.mask("00.000.000/0000-00");
         });
     },
     CPF() {
+        // @ts-ignore
         $("body").on("focus", ".MaskCPF", function() {
+            // @ts-ignore
             field = $(this).find("input");
+            // @ts-ignore
             field.mask("000.000.000-00");
         });
     },
     Phone() {
+        // @ts-ignore
         $("body").on("focus", ".MaskPhone", function() {
+            // @ts-ignore
             field = $(this).find("input");
+            // @ts-ignore
             field.on("keyup", function(e) {
                 setTimeout(
+                    // @ts-ignore
                     $.proxy(function() {
-                        if (this.value.length > 14)
-                            $(this).mask("(00) 00000-0000");
+                        // @ts-ignore
+                        if (this.value.length > 14) $(this).mask("(00) 00000-0000");
+                        // @ts-ignore
                         else $(this).mask("(00) 0000-00000");
                     }, this)
                 );
