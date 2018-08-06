@@ -5,18 +5,42 @@ export let Files = [
         //-- Causa do problema: Variáveis externas do genexus, executam antes do evento start da página.
 
         //-- Bibliotecas externas
-        "jquery.mask",
-        "xls-export",
-        "pace-config",
-        "pace",
+        {
+            src: "jquery.mask",
+            type: "text/javascript"
+        },
+        {
+            src: "xls-export",
+            type: "text/javascript"
+        },
+        {
+            src: "pace-config",
+            type: "text/javascript"
+        },
+        {
+            src: "pace",
+            type: "text/javascript"
+        },
 
-        //-- Funções Custom Method
-        "method_afterload",
-        "method_loading",
+        //-- Módulos Custom Method
+        {
+            src: "method_classes",
+            type: "module"
+        },
+        {
+            src: "method_util",
+            type: "module"
+        },
+        {
+            src: "method_loading",
+            type: "module"
+        },
 
         //-- Arquivos Externos
-        "method_config_bar",
-        "method_ajax"
+        {
+            src: "method_ajax",
+            type: "text/javascript"
+        }
     ],
     ["method_custom", "switches"]
 ];

@@ -6,7 +6,7 @@
 
 let controle = false;
 
-let Method_Custom = class {
+class Method_Custom {
     LoadVariable(varName) {
         let varValue = window[varName];
         return varValue;
@@ -326,5 +326,11 @@ class Method_Avatar {
 
     SetImage(value) {
         this.ImageBase64 = value;
+    }
+}
+
+class Method_Methods {
+    static SetValue(EmpresaIdValue) {
+        gx.fx.obs.notify("Method_Custom.ChangeEmpresa", [EmpresaIdValue]);
     }
 }

@@ -65,9 +65,9 @@ export class Method_Scripts {
         for (let i = 0; i < Files[0].length; i++) {
             let scriptTag = document.createElement("script");
             
-            scriptTag.type = "text/javascript";
+            scriptTag.type = Files[0][i].type;
             
-            scriptTag.src = `shared/method/js/${Files[0][i]}.js`;
+            scriptTag.src = `shared/method/js/${Files[0][i].src}.js`;
 
             document.body.lastElementChild.appendChild(scriptTag);
         }

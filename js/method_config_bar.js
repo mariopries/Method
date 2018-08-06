@@ -24,15 +24,15 @@ Config = class {
         for (let i = 0; i < this.items.length; i++) {
             rawHTML += "<li>";
             switch (this.items[i].Type) {
-                case "SW":
+                case "SW": // Switch
                     rawHTML += Config.BuildSwitch(this.items[i]);
                     break;
 
-                case "CB":
+                case "CB": // Combo Box
                     rawHTML += Config.BuildCombo(this.items[i]);
                     break;
 
-                case "BI":
+                case "BI": // Basic Input
                     rawHTML += Config.BuildInput(this.items[i]);
                     break;
             }
