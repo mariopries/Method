@@ -57,15 +57,15 @@ let Method_Custom = class {
 
     LoaderExecute(executar) {
         if (executar) {
-            // @ts-ignore
+            
             if (!$(".gx-mask")[0]) {
-                // @ts-ignore
+                
                 $("body").append("<div class='gx-mask'></div>");
             }
         } else {
-            // @ts-ignore
+            
             if ($(".gx-mask")[0]) {
-                // @ts-ignore
+                
                 $(".gx-mask").remove();
             }
         }
@@ -120,14 +120,14 @@ let Method_Custom = class {
     }
 
     AlterarValorCampo(id, value) {
-        // @ts-ignore
+        
         $(eval(id))[0].value = value;
     }
 
     AlterarValorCampoGrid(id, value) {
-        // @ts-ignore
+        
         id = `${id}_${window.gx.currentRows.pop()}`;
-        // @ts-ignore
+        
         $(eval(id))[0].value = value;
     }
 
@@ -142,10 +142,10 @@ let Method_Custom = class {
 
     SetFocus(fieldId) {
         if (fieldId == "prev" && lastFocused != null) {
-            // @ts-ignore
+            
             $(lastFocused).focus();
         } else if (fieldId != null) {
-            // @ts-ignore
+            
             let fieldToFocus = $("#" + fieldId);
             if (fieldToFocus) {
                 fieldToFocus.focus();
@@ -203,15 +203,15 @@ class Method_Avatar {
                             </table>
                         </div>`;
 
-            // @ts-ignore
+            
             $("#corpoCropit").remove();
-            // @ts-ignore
+            
             $("#W0015TUPLOAD").append(html);
-            // @ts-ignore
+            
             $("#TUPLOAD").append(html);
         };
         let GeraCropit = () => {
-            // @ts-ignore
+            
             $(".image-editor").cropit({
                 exportZoom: 1.25,
                 imageBackground: true,
@@ -223,11 +223,11 @@ class Method_Avatar {
             });
         };
         let EventoRolagemMouse = () => {
-            // @ts-ignore
+            
             $(".cropit-preview").bind("mousewheel", function(event) {
                 event.preventDefault();
 
-                // @ts-ignore
+                
                 let slider = $(".cropit-image-zoom-input");
                 let currVal = parseFloat(slider.val());
                 let increment = event.originalEvent.wheelDelta > 0 ? 0.1 : 0.1 * -1;
@@ -239,40 +239,40 @@ class Method_Avatar {
         };
         let AcaoBotoes = () => {
             //-- Rolagem da imagem a esquerda
-            // @ts-ignore
+            
             $("#rotate-cw").click(function(event) {
                 event.preventDefault();
-                // @ts-ignore
+                
                 $(".image-editor").cropit("rotateCW");
             });
 
             //-- Da trigger no input de type file
-            // @ts-ignore
+            
             $("#selectArquivo").click(function(event) {
                 event.preventDefault();
-                // @ts-ignore
+                
                 $("#uploadImagem").trigger("click");
             }),
                 //-- Rolagem da imagem a direita
-                // @ts-ignore
+                
                 $("#rotate-ccw").click(function(event) {
                     event.preventDefault();
-                    // @ts-ignore
+                    
                     $(".image-editor").cropit("rotateCCW");
                 });
 
             //-- Aplicar e visualizar
             document.getElementById("aplicarAvatar").addEventListener("click", () => {
-                // @ts-ignore
+                
                 let imageData = $(".image-editor").cropit("export");
                 this.ImageBase64 = imageData;
 
-                // @ts-ignore
+                
                 gx.fx.obs.notify("Method_Avatar.SalvarAvatar");
 
-                // @ts-ignore
+                
                 $("#previlPerfil1").remove();
-                // @ts-ignore
+                
                 $("#previlPerfil2").remove();
 
                 setTimeout(function() {
@@ -282,28 +282,28 @@ class Method_Avatar {
                                         <img style="margin-top:10px;" align="middle" src="${imageData}" id="previlPerfil2" alt="Prévia do perfil" class="previa-avatar-redondo"/>
                                     </div>`;
 
-                    // @ts-ignore
+                    
                     $("#TAVATAR").append(divPrev);
 
                     setTimeout(function() {
                         //$("#previlPerfil1").fadeIn(700);
-                        // @ts-ignore
+                        
                         $("#previlPerfil2").fadeIn(700);
                     }, 220);
                 }, 215);
             });
 
             //-- Salvar imagem (Comunicação com GeneXus)
-            // @ts-ignore
+            
             $("#salvaAvatar").click(function(event) {
                 event.preventDefault();
 
                 //-- Remove o input type file (Ocorrendo travamento da tela, então tem que ser removido pós utilizar)
-                // @ts-ignore
+                
                 $("#uploadImagem").remove();
 
                 //-- Executa o comando de atualizar o avatar
-                // @ts-ignore
+                
                 gx.fx.obs.notify("Method_Avatar.ExecutarAlteracao");
             });
         };

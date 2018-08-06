@@ -17,16 +17,16 @@ let Method = {
     BlurValidation() {
         let currentIndex,
             lastIndex = 0,
-            // @ts-ignore
+            
             lastId,
-            mapaFormulario = new Array();
+            mapaFormulario;
 
         document.querySelectorAll("input, select").forEach(value =>
             value.addEventListener("focus", event => {
-                // @ts-ignore
+                
                 currentIndex = event.target.gxIndex;
                 if (currentIndex > lastIndex) {
-                    // @ts-ignore
+                    
                     mapaFormulario = $("input, select");
                     let objs = mapaFormulario.filter(index => {
                         let answer = mapaFormulario[index].gxIndex < currentIndex && mapaFormulario[index].gxIndex >= lastIndex;
@@ -36,12 +36,12 @@ let Method = {
                         let answer = objs[index].id;
                         return answer;
                     });
-                    // @ts-ignore
+                    
                     gx.fx.obs.notify("Method_Custom.blurCampo", [objIds]);
                 }
-                // @ts-ignore
+                
                 lastIndex = event.target.gxIndex;
-                // @ts-ignore
+                
                 lastId = event.target.id;
             })
         );
@@ -49,7 +49,7 @@ let Method = {
 
     //-- Função que corrige a interação com focus nos prompts em Web Panels, fazendo o focus ir para o próximo campo
     FixPrompts() {
-        // @ts-ignore
+        
         let prompts = $(".Method-PromptBtn");
         for (let i = 0; i < prompts.length; i++) {
             prompts[i].tabIndex = 1;
@@ -58,7 +58,7 @@ let Method = {
 
     //-- Função que altera o Id das empresas utilizando o combo box na navbar
     ChangeEmpresaId(EmpresaIdValue) {
-        // @ts-ignore
+        
         gx.fx.obs.notify("Method_Custom.ChangeEmpresa", [EmpresaIdValue]);
     }
 };
@@ -66,19 +66,19 @@ let Method = {
 //-- Funções relacionadas ao Menu Lateral
 let Menu = {
     Collapse() {
-        // @ts-ignore
+        
         ucSidebar.Collapse();
     },
     Expand() {
-        // @ts-ignore
+        
         ucSidebar.Expand();
     },
     CollapseExpand() {
-        // @ts-ignore
+        
         ucSidebar.CollapseExpand();
     },
     get visible() {
-        // @ts-ignore
+        
         return ucSidebar.Visible; //--Retorna um boolean
     },
 
@@ -88,7 +88,7 @@ let Menu = {
         let slimScrollDiv = document.querySelectorAll(".slimScrollDiv");
 
         sidebar_ul.style.setProperty("height", `calc(100vh - 186px)`);
-        // @ts-ignore
+        
         slimScrollDiv.forEach(value => value.style.setProperty("height", `auto`));
     },
 
@@ -140,7 +140,7 @@ let KeyBind = {
             }
         }
 
-        // @ts-ignore
+        
         $("body").on("focus", ".AttributeRealWidth", function() {
             if (this.parentNode.parentNode.nodeName === "TD" && this === document.activeElement) {
                 this.addEventListener("keydown", WebPanel);
@@ -150,7 +150,7 @@ let KeyBind = {
                 }
             }
         });
-        // @ts-ignore
+        
         $("body").on("focusout", ".AttributeRealWidth", function() {
             this.removeEventListener("keydown", WebPanel);
         });
@@ -160,15 +160,15 @@ let KeyBind = {
 //-- Funções de mask dos campos dos formulários
 let Mask = {
     Load() {
-        // @ts-ignore
+        
         $("body").on("focusout", ":input", function() {
             lastFocused = this;
         });
-        // @ts-ignore
+        
         $(window).bind("beforeunload", function() {
-            // @ts-ignore
+            
             if (!$(".gx-mask")[0]) {
-                // @ts-ignore
+                
                 $("body").append("<div class='gx-mask'></div>");
             }
         });
@@ -217,13 +217,13 @@ let Mask = {
             }
         };
 
-        // @ts-ignore
+        
         $("body").on("focus", ".MaskIE", function() {
             let uf;
-            // @ts-ignore
+            
             let field = $(this).find("input");
             if (field[0].value.length <= 1) {
-                // @ts-ignore
+                
                 field.on("keyup", event => {
                     if (field[0].value.match("[0-9]+$")) {
                         condition(field, uf);
@@ -239,29 +239,29 @@ let Mask = {
         });
     },
     DateTime() {
-        // @ts-ignore
+        
         $("body").on("focus", ".MaskDateTime", function() {
-            // @ts-ignore
-            field = $(this).find("input");
-            // @ts-ignore
+            
+            let field = $(this).find("input");
+            
             field.mask("00/00/0000 00:00");
         });
     },
     Date() {
-        // @ts-ignore
+        
         $("body").on("focus", ".MaskDate", function() {
-            // @ts-ignore
-            field = $(this).find("input");
-            // @ts-ignore
+            
+            let field = $(this).find("input");
+            
             field.mask("00/00/0000");
         });
     },
     Placa() {
-        // @ts-ignore
+        
         $("body").on("focus", ".MaskPlaca", function() {
-            // @ts-ignore
-            field = $(this).find("input");
-            // @ts-ignore
+            
+            let field = $(this).find("input");
+            
             field.mask("SSS-0000", {
                 translation: {
                     S: { pattern: /[A-Za-z]/ },
@@ -274,45 +274,43 @@ let Mask = {
         });
     },
     CEP() {
-        // @ts-ignore
+        
         $("body").on("focus", ".MaskCep", function() {
-            // @ts-ignore
-            field = $(this).find("input");
-            // @ts-ignore
+            
+            let field = $(this).find("input");
+            
             field.mask("00000-000");
         });
     },
     CNPJ() {
-        // @ts-ignore
+        
         $("body").on("focus", ".MaskCNPJ", function() {
-            // @ts-ignore
-            field = $(this).find("input");
-            // @ts-ignore
+            
+            let field = $(this).find("input");
+            
             field.mask("00.000.000/0000-00");
         });
     },
     CPF() {
-        // @ts-ignore
+        
         $("body").on("focus", ".MaskCPF", function() {
-            // @ts-ignore
-            field = $(this).find("input");
-            // @ts-ignore
+            
+            let field = $(this).find("input");
+            
             field.mask("000.000.000-00");
         });
     },
     Phone() {
-        // @ts-ignore
+        
         $("body").on("focus", ".MaskPhone", function() {
-            // @ts-ignore
-            field = $(this).find("input");
-            // @ts-ignore
+            
+            let field = $(this).find("input");
+            
             field.on("keyup", function(e) {
                 setTimeout(
-                    // @ts-ignore
+                    
                     $.proxy(function() {
-                        // @ts-ignore
                         if (this.value.length > 14) $(this).mask("(00) 00000-0000");
-                        // @ts-ignore
                         else $(this).mask("(00) 0000-00000");
                     }, this)
                 );

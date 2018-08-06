@@ -14,12 +14,8 @@ export let Files = [
         "method_loading",
 
         //-- Arquivos Externos
-        "method_menu",
-        "method_mobile",
         "method_config_bar",
-        "method_mask",
-        "method_onload",
-        "method_excel",
+        "method_afterload",
         "method_ajax"
     ],
     ["shared/method/css/method_custom.css", "shared/method/css/switches.css"]
