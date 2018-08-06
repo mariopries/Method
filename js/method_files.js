@@ -11,12 +11,12 @@ export let Files = [
         "pace",
 
         //-- Funções Custom Method
+        "method_afterload",
         "method_loading",
 
         //-- Arquivos Externos
         "method_config_bar",
-        "method_afterload",
         "method_ajax"
     ],
-    ["shared/method/css/method_custom.css", "shared/method/css/switches.css"]
+    ["method_custom", "switches"]
 ];

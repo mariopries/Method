@@ -1,32 +1,27 @@
-//@ts-check
-
 //-- Variáveis
 let lastFocused;
 //OBJETOS
 
 //-- Funções para serem utilizadas nos arquivos JS externos
-let Method = {
+class Method {
     //-- Função de uso geral para converter letras do alfabeto no número correspondente às mesmas
-    ConvertToLetters(num) {
+    static ConvertToLetters(num) {
         var arr = "abcdefghijklmnopqrstuvwxyz".split("");
         var resultado = arr[num + 1] ? arr[num + 1].toUpperCase() : 0;
         return resultado;
-    },
+    }
 
     //-- Função para validar o evento isValid no Genexus (O evento do Genexus se aplica apenas no momento em que o campo é alterado)
-    BlurValidation() {
+    static BlurValidation() {
         let currentIndex,
             lastIndex = 0,
-            
             lastId,
             mapaFormulario;
 
         document.querySelectorAll("input, select").forEach(value =>
             value.addEventListener("focus", event => {
-                
                 currentIndex = event.target.gxIndex;
                 if (currentIndex > lastIndex) {
-                    
                     mapaFormulario = $("input, select");
                     let objs = mapaFormulario.filter(index => {
                         let answer = mapaFormulario[index].gxIndex < currentIndex && mapaFormulario[index].gxIndex >= lastIndex;
@@ -36,86 +31,78 @@ let Method = {
                         let answer = objs[index].id;
                         return answer;
                     });
-                    
+
                     gx.fx.obs.notify("Method_Custom.blurCampo", [objIds]);
                 }
-                
+
                 lastIndex = event.target.gxIndex;
-                
+
                 lastId = event.target.id;
             })
         );
-    },
+    }
 
     //-- Função que corrige a interação com focus nos prompts em Web Panels, fazendo o focus ir para o próximo campo
-    FixPrompts() {
-        
+    static FixPrompts() {
         let prompts = $(".Method-PromptBtn");
         for (let i = 0; i < prompts.length; i++) {
             prompts[i].tabIndex = 1;
         }
-    },
+    }
 
     //-- Função que altera o Id das empresas utilizando o combo box na navbar
-    ChangeEmpresaId(EmpresaIdValue) {
-        
+    static ChangeEmpresaId(EmpresaIdValue) {
         gx.fx.obs.notify("Method_Custom.ChangeEmpresa", [EmpresaIdValue]);
     }
-};
+}
 
 //-- Funções relacionadas ao Menu Lateral
-let Menu = {
-    Collapse() {
-        
+class Menu {
+    static Collapse() {
         ucSidebar.Collapse();
-    },
-    Expand() {
-        
+    }
+    static Expand() {
         ucSidebar.Expand();
-    },
-    CollapseExpand() {
-        
+    }
+    static CollapseExpand() {
         ucSidebar.CollapseExpand();
-    },
-    get visible() {
-        
+    }
+    static get visible() {
         return ucSidebar.Visible; //--Retorna um boolean
-    },
-
+    }
     //-- Corrige o tamanho da área visível do menu ao redimensionar a tela
-    FixHeight() {
+    static FixHeight() {
         let sidebar_ul = document.getElementById("sidebar_ul");
         let slimScrollDiv = document.querySelectorAll(".slimScrollDiv");
 
         sidebar_ul.style.setProperty("height", `calc(100vh - 186px)`);
-        
-        slimScrollDiv.forEach(value => value.style.setProperty("height", `auto`));
-    },
 
+        slimScrollDiv.forEach(value => value.style.setProperty("height", `auto`));
+    }
     //-- Corrige a responsividade da tela conforme o menu se adapta (É chamada pelo método Cycle)
-    Resize() {
-        let sidebar = document.getElementById("sidebar");
-        let content = document.getElementById("TABLECONTENT_MPAGE");
-        let title = document.getElementById("TEXTBLOCKTITLE_MPAGE").parentElement;
-        if (sidebar && content && title) {
+    static Resize() {
+        if (document.getElementById("sidebar") && document.getElementById("TABLECONTENT_MPAGE") && document.getElementById("TEXTBLOCKTITLE_MPAGE")) {
+            let sidebar = document.getElementById("sidebar");
+            let content = document.getElementById("TABLECONTENT_MPAGE");
+            let title = document.getElementById("TEXTBLOCKTITLE_MPAGE").parentElement;
             let footer = document.getElementById("TABLEFOOTER_MPAGE").parentElement;
             let largura = sidebar.offsetWidth;
             content.style.setProperty("margin-left", `${largura}px`);
             title.style.setProperty("margin-left", `${largura}px`);
             footer.style.setProperty("padding-left", `${largura + 15}px`);
         }
-    },
+    }
     //-- Corrige a responsividade da página uma vez por frame
-    Cycle() {
+    static Cycle() {
         Menu.Resize();
         Menu.FixHeight();
         window.requestAnimationFrame(Menu.Cycle);
     }
-};
+}
 
 //-- Funções utilizadas para remapeamento de atalhos do teclado
-let KeyBind = {
-    Bind(key = "F9") {
+class KeyBind {
+    static Bind(key = "F9") {
         document.addEventListener("keydown", event => {
             if (event.key === key) {
                 if (document.getElementById("BTNINSERT") || document.getElementById("BTNINSERTTESTE")) {
@@ -124,8 +111,8 @@ let KeyBind = {
                 }
             }
         });
-    },
-    SelectedBind(key = "F2") {
+    }
+    static SelectedBind(key = "F2") {
         function WebPanel(event) {
             if (event.key === key) {
                 let objeto = this.parentNode.parentNode.nextSibling.firstChild;
@@ -140,7 +127,6 @@ let KeyBind = {
             }
         }
 
-        
         $("body").on("focus", ".AttributeRealWidth", function() {
             if (this.parentNode.parentNode.nodeName === "TD" && this === document.activeElement) {
                 this.addEventListener("keydown", WebPanel);
@@ -150,30 +136,27 @@ let KeyBind = {
                 }
             }
         });
-        
+
         $("body").on("focusout", ".AttributeRealWidth", function() {
             this.removeEventListener("keydown", WebPanel);
         });
     }
-};
+}
 
 //-- Funções de mask dos campos dos formulários
-let Mask = {
-    Load() {
-        
+class Mask {
+    static Load() {
         $("body").on("focusout", ":input", function() {
             lastFocused = this;
         });
-        
+
         $(window).bind("beforeunload", function() {
-            
             if (!$(".gx-mask")[0]) {
-                
                 $("body").append("<div class='gx-mask'></div>");
             }
         });
-    },
-    IE() {
+    }
+    static IE() {
         let condition = (field, uf) => {
             if (document.getElementById("span_EMPRESACIDADEESTADOID") || document.getElementById("span_PARTICIPANTE_PARTICIPANTEESTADOID")) {
                 uf = document.getElementById("span_EMPRESACIDADEESTADOID")
@@ -217,13 +200,11 @@ let Mask = {
             }
         };
 
-        
         $("body").on("focus", ".MaskIE", function() {
             let uf;
-            
+
             let field = $(this).find("input");
             if (field[0].value.length <= 1) {
-                
                 field.on("keyup", event => {
                     if (field[0].value.match("[0-9]+$")) {
                         condition(field, uf);
@@ -237,31 +218,25 @@ let Mask = {
                 });
             }
         });
-    },
-    DateTime() {
-        
+    }
+    static DateTime() {
         $("body").on("focus", ".MaskDateTime", function() {
-            
             let field = $(this).find("input");
-            
+
             field.mask("00/00/0000 00:00");
         });
-    },
-    Date() {
-        
+    }
+    static Date() {
         $("body").on("focus", ".MaskDate", function() {
-            
             let field = $(this).find("input");
-            
+
             field.mask("00/00/0000");
         });
-    },
-    Placa() {
-        
+    }
+    static Placa() {
         $("body").on("focus", ".MaskPlaca", function() {
-            
             let field = $(this).find("input");
-            
+
             field.mask("SSS-0000", {
                 translation: {
                     S: { pattern: /[A-Za-z]/ },
@@ -272,43 +247,34 @@ let Mask = {
                 }
             });
         });
-    },
-    CEP() {
-        
+    }
+    static CEP() {
         $("body").on("focus", ".MaskCep", function() {
-            
             let field = $(this).find("input");
-            
+
             field.mask("00000-000");
         });
-    },
-    CNPJ() {
-        
+    }
+    static CNPJ() {
         $("body").on("focus", ".MaskCNPJ", function() {
-            
             let field = $(this).find("input");
-            
+
             field.mask("00.000.000/0000-00");
         });
-    },
-    CPF() {
-        
+    }
+    static CPF() {
         $("body").on("focus", ".MaskCPF", function() {
-            
             let field = $(this).find("input");
-            
+
             field.mask("000.000.000-00");
         });
-    },
-    Phone() {
-        
+    }
+    static Phone() {
         $("body").on("focus", ".MaskPhone", function() {
-            
             let field = $(this).find("input");
-            
+
             field.on("keyup", function(e) {
                 setTimeout(
-                    
                     $.proxy(function() {
                         if (this.value.length > 14) $(this).mask("(00) 00000-0000");
                         else $(this).mask("(00) 0000-00000");
@@ -316,8 +282,8 @@ let Mask = {
                 );
             });
         });
-    },
-    All() {
+    }
+    static All() {
         Mask.Load();
         Mask.CEP();
         Mask.CNPJ();
@@ -328,4 +294,26 @@ let Mask = {
         Mask.Phone();
         Mask.Placa();
     }
+}
+
+let afterLoad = () => {
+    Menu.Cycle();
+    Method.BlurValidation();
+    KeyBind.Bind("F9");
+    KeyBind.SelectedBind();
+    Mask.All();
+    $("body").on("focus", ":input", () => {
+        Method.FixPrompts();
+    });
 };
+
+try {
+
+    afterLoad();
+    
+} catch (error) {
+
+    location.reload();
+    
+}
+

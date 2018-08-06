@@ -1,4 +1,4 @@
-//@ts-check
+
 
 //-- Classes de objetos externos Method_Custom
 
@@ -23,7 +23,6 @@ let Method_Custom = class {
     }
 
     AddHTML(target, newHTML) {
-        // EmpresasInnerHTML = newHTML;
         document.getElementById(target).innerHTML = newHTML;
     }
 

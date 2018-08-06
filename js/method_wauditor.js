@@ -3,11 +3,19 @@ import { Files } from "./method_files.js";
 window.onload = () => {
     let Scripts = new Method_Scripts();
     let Styles = new Method_Styles();
+
+    //Remove os styles que estão na lista
     Files[1] = Files[1].map(Styles.RemoveStyles, Styles);
+    //Filtra apenas os valores que não são nulos
     Files[1] = Files[1].filter(value => value);
+
     Styles.AppendStyles();
+
+    //Remove os scripts que estão na lista
     Files[0] = Files[0].map(Scripts.RemoveScripts, Scripts);
+    //Filtra apenas os valores que não são nulos
     Files[0] = Files[0].filter(value => value);
+    
     Scripts.AppendScripts();
 };
 
@@ -90,7 +98,7 @@ export class Method_Styles {
     AppendStyles() {
         for (let i = 0; i < Files[1].length; i++) {
             let style = document.createElement("link");
-            style.href = Files[1][i];
+            style.href = `shared/method/css/${Files[1][i]}.css`;
             style.type = "text/css";
             style.rel = "stylesheet";
             document.head.appendChild(style);

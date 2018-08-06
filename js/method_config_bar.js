@@ -129,7 +129,6 @@ Config = class {
         sideconfig.style.width = "0px";
         content.style.paddingRight = "15px";
         footer.style.paddingRight = "15px";
-        // setTimeout(ChangeName('sidebar-config collapsed'),2500);
     }
 
     static EnableButton() {
