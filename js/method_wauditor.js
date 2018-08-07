@@ -1,6 +1,7 @@
 import { Files } from "./method_files.js";
 
-window.onload = () => {
+export function insertCode(version) {
+
     let Scripts = new Method_Scripts();
     let Styles = new Method_Styles();
 
@@ -16,11 +17,30 @@ window.onload = () => {
     //Filtra apenas os valores que não são nulos
     Files[0] = Files[0].filter(value => value);
     
-    Scripts.AppendScripts();
-};
+    Scripts.AppendScripts(version);
+
+    return new Promise((resolve, reject) => {
+
+        try {
+
+            let selfDestruct = document.getElementById('self_destruct');
+            selfDestruct.remove(); 
+            
+        } catch (error) {
+            
+            if (confirm('Erro na inicialização da página, favor limpar o cache e atualizar a página.')) {
+                location.reload();
+            }
+
+        }
+       
+    })
+
+}
 
 export class Method_Scripts {
     constructor() {
+
         this.scripts = [
             //-- Bibliotecas externas
 
@@ -55,7 +75,7 @@ export class Method_Scripts {
         }
     }
 
-    AppendScripts() {
+    AppendScripts(version = Date.now()) {
         let footer = document.createElement("footer");
 
         footer.id = "MethodFooter";
@@ -67,7 +87,7 @@ export class Method_Scripts {
             
             scriptTag.type = Files[0][i].type;
             
-            scriptTag.src = `shared/method/js/${Files[0][i].src}.js`;
+            scriptTag.src = `shared/method/js/${Files[0][i].src}.js?v=${version}`;
 
             document.body.lastElementChild.appendChild(scriptTag);
         }
@@ -76,6 +96,7 @@ export class Method_Scripts {
 
 export class Method_Styles {
     constructor() {
+
         this.styles = [
             //-- Inserir os styles que não devem ser inclusos
         ];

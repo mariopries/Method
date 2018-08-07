@@ -21,7 +21,10 @@ export let Files = [
             src: "pace",
             type: "text/javascript"
         },
-
+        {
+            src: "lodash.min",
+            type: "text/javascript"
+        },
         //-- Módulos Custom Method
         {
             src: "method_classes",

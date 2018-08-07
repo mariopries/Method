@@ -157,8 +157,22 @@ class Method_Custom {
     }
 
     PNotify(msgnotify) {
-        eval(msgnotify);
+
+        if (document.querySelectorAll('.ui-pnotify').length <= 1) {
+            eval(msgnotify);
+        }else{
+            document.querySelectorAll('.ui-pnotify')[0].firstChild.firstChild.click();
+        }
     }
+
+    async MakeAsync(inFunction, args) {
+        return new Promise((resolve, reject) => inFunction.apply(this, args));
+    }
+
+    Run(functionToRun, args) {
+        functionToRun.apply(this,args);
+    }
+
 };
 
 //--Method_Avatar

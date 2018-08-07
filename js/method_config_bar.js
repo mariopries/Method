@@ -79,9 +79,7 @@ Config = class {
         return `<i class="menu-icon ${item.Icon}"></i>
                 <span>&ThickSpace;${item.Name}</span>
                 <div class="config-input">
-                    <input type="text" class="form-control" placeholder="${
-                        item.Name
-                    }">
+                    <input type="text" class="form-control" placeholder="${item.Name}">
                 </div>`;
     }
 
@@ -98,8 +96,7 @@ Config = class {
 
     static Trigger() {
         let sideconfig = document.getElementById("config-bar");
-        let content = document.getElementById("TABLECONTENT_MPAGE")
-            .parentElement;
+        let content = document.getElementById("TABLECONTENT_MPAGE").parentElement;
         let footer = document.getElementById("TABLEFOOTER_MPAGE").parentElement;
         content.style.transitionDuration = ".25s";
         footer.style.transitionDuration = ".25s";
@@ -112,8 +109,7 @@ Config = class {
 
     static Expand() {
         let sideconfig = document.getElementById("config-bar");
-        let content = document.getElementById("TABLECONTENT_MPAGE")
-            .parentElement;
+        let content = document.getElementById("TABLECONTENT_MPAGE").parentElement;
         let footer = document.getElementById("TABLEFOOTER_MPAGE").parentElement;
         sideconfig.style.width = "250px";
         content.style.paddingRight = "265px";
@@ -123,8 +119,7 @@ Config = class {
 
     static Collapse() {
         let sideconfig = document.getElementById("config-bar");
-        let content = document.getElementById("TABLECONTENT_MPAGE")
-            .parentElement;
+        let content = document.getElementById("TABLECONTENT_MPAGE").parentElement;
         let footer = document.getElementById("TABLEFOOTER_MPAGE").parentElement;
         sideconfig.style.width = "0px";
         content.style.paddingRight = "15px";
@@ -134,4 +129,4 @@ Config = class {
     static EnableButton() {
         document.getElementById("SHOWCONFIG_MPAGE").onclick = Config.Trigger;
     }
-}
+};
