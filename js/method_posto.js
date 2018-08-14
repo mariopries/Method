@@ -56,7 +56,7 @@ export class Method_Scripts {
             // //-- Arquivos Externos
 
             // "method_ajax",
-            // "method_config_bar"
+            //"method_config_bar"
             // //--------------------------------
         ];
     }
@@ -76,6 +76,7 @@ export class Method_Scripts {
     }
 
     AppendScripts(version = Date.now()) {
+
         let footer = document.createElement("footer");
 
         footer.id = "MethodFooter";

@@ -66,13 +66,16 @@ export class Menu {
         return ucSidebar.Visible; //--Retorna um boolean
     }
     //-- Corrige o tamanho da área visível do menu ao redimensionar a tela
-    static FixHeight() {
-        let sidebar_ul = document.getElementById("sidebar_ul");
-        let slimScrollDiv = document.querySelectorAll(".slimScrollDiv");
+    static FixHeight() {        
+        if (document.getElementById("sidebar_ul")){
 
-        sidebar_ul.style.setProperty("height", `calc(100vh - 186px)`);
+            let sidebar_ul = document.getElementById("sidebar_ul");
+            let slimScrollDiv = document.querySelectorAll(".slimScrollDiv");
 
-        slimScrollDiv.forEach(value => value.style.setProperty("height", `auto`));
+            sidebar_ul.style.setProperty("height", `calc(100vh - 186px)`);
+
+            slimScrollDiv.forEach(value => value.style.setProperty("height", `auto`));
+        }
     }
     //-- Corrige a responsividade da tela conforme o menu se adapta (É chamada pelo método Cycle)
     static Resize() {
@@ -153,10 +156,8 @@ export class Mask {
     }
     static IE() {
         let condition = (field, uf) => {
-            if (document.getElementById("span_EMPRESACIDADEESTADOID") || document.getElementById("span_PARTICIPANTE_PARTICIPANTEESTADOID")) {
-                uf = document.getElementById("span_EMPRESACIDADEESTADOID")
-                    ? document.getElementById("span_EMPRESACIDADEESTADOID").innerText
-                    : document.getElementById("span_PARTICIPANTE_PARTICIPANTEESTADOID").innerText;
+            if (document.getElementById("span_EMPRESACIDADEESTADOID") || document.getElementById("span_PARTICIPANTE_PARTICIPANTEESTADOID") || document.getElementById("span_CLIUF") ) {
+                uf = ChoseEstado();
             }
             if (uf === "AP" || uf === "AL") {
                 field.mask("AAAAAAAAA");
@@ -194,6 +195,16 @@ export class Mask {
                 field.mask("AAA.AAA.AAA.AAA");
             }
         };
+
+        function ChoseEstado() {
+            if (document.getElementById("span_EMPRESACIDADEESTADOID")) {
+                return document.getElementById("span_EMPRESACIDADEESTADOID").innerText                
+            } else if ( document.getElementById("span_PARTICIPANTE_PARTICIPANTEESTADOID") ) {
+                return document.getElementById("span_PARTICIPANTE_PARTICIPANTEESTADOID").innerText
+            } else if (document.getElementById("span_CLIUF")) {
+                return document.getElementById("span_CLIUF").innerText
+            }
+        }
 
         $("body").on("focus", ".MaskIE", function() {
             let uf;
