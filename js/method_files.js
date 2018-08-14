@@ -6,7 +6,7 @@ export let Files = [
 
         //-- Bibliotecas externas
         {
-            src: "jquery.mask.new",
+            src: "jquery.mask",
             type: "text/javascript"
         },
         {
