@@ -2,7 +2,6 @@ import { lastFocused, Method, Menu, KeyBind, Mask } from "./method_classes.js";
 import { makeAsync } from "./method_util.js";
 
 function afterLoad() {
-
     Menu.Cycle();
     Method.BlurValidation();
     KeyBind.Bind("F9");
@@ -11,7 +10,6 @@ function afterLoad() {
     $("body").on("focus", ":input", () => {
         Method.FixPrompts();
     });
-
 }
 
 try {

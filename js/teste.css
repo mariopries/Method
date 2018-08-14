@@ -28,3 +28,7 @@ page-sidebar .sidebar-menu .submenu > li .submenu > li.active > a:before {
 .page-content {
     transition-duration: 1000ms;
 }
+
+.ReadonlyMethodEditable {
+    padding-right: 10px;
+}

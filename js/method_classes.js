@@ -223,7 +223,7 @@ export class Mask {
     }
     static Date() {
         $("body").on("focus", ".MaskDate", function() {
-            let field = $(this).find("input");
+            let field = $(this).find('input').first();
 
             field.mask("00/00/0000");
         });

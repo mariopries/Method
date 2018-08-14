@@ -48,20 +48,146 @@ i.fas.fa-cog.config-button-header:hover {
 }
 
 .sidebar-config {
-    width: 0px;
-    height: calc(100vh - 50px);
+    /* min-width: 300px; */
+    width: 0;
+    height: 5000;
     background-color: #dadada;
     box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.5);
     position: fixed;
     right: 0;
     top: 50px;
-    z-index: 1001;
+    z-index: 1000;
     text-decoration: unset;
     transition-duration: 0.25s !important;
     overflow: hidden;
 }
 
-.sidebar-config > ul {
+.sidebar-container-method {
+
+    width: calc( 100% + 50px);
+
+    padding-right: 33.65px;
+
+    height: calc(100vh - 50px);
+
+    overflow-y: scroll;
+
+    overflow-x: hidden;
+
+}
+
+.method-list {
+
+    text-decoration: none;
+
+    list-style: none;
+
+    display: block;
+
+    -webkit-padding-start: 0;
+
+    padding: 10px;
+
+    width: calc( 100% + 50px);
+
+}
+
+.method-list :hover {
+
+    text-decoration: none;
+
+    list-style: none;
+
+}
+
+.method-list > li {
+
+    /* padding: 20px; */
+
+    text-decoration: none;
+
+    display: inline-block;
+}
+
+.method-list > li {
+
+    font-size: 12px;
+
+    padding: 10px;
+
+    width: inherit;
+
+}
+
+.method-sidebar-content {
+    background-color: rgb(148, 180, 148);
+    display: none;
+    margin-bottom: 0;
+    padding: 5px;
+    width: calc( 100% - 100px);
+}
+
+.method-sidebar-title {
+
+    height: 40px;
+    width: calc( 100% - 50px);
+    margin: -20px;
+    padding: 10px;
+    margin-bottom: 0px;
+    background-color: #00a800;
+    border-style: solid;
+    border-color: #002700;
+    border-width: 1px;
+    color: white;
+    display: block;
+    cursor: pointer;
+    text-decoration: none;
+}
+
+.method-sidebar-content :hover {
+    color: unset;
+}
+
+.method-sidebar-title > span.caret.pull-right {
+
+    margin-top: 7px;
+
+}
+
+textarea {
+    resize: none;
+}
+
+.ReadonlyMethodEditable {
+    padding-right: 10px;
+}
+
+/* .method-list :hover {
+
+    background-color: #009900;
+
+} */
+
+/* .method-list > li > a > span {
+
+    display: block;
+
+} */
+
+/* .sidebar-config > div {
+
+    padding: 20px;
+
+}
+
+.sidebar-config > div > div > ul {
+
+    text-decoration: none;
+    list-style: none;
+
+} */
+
+/* .sidebar-config > div > ul {
     margin: 0;
     padding: 0;
     padding-top: 20px;
@@ -69,7 +195,7 @@ i.fas.fa-cog.config-button-header:hover {
     text-decoration: unset;
     color: rgb(0, 51, 0);
 }
-.sidebar-config > ul > li {
+.sidebar-config > div > div > div > ul > li {
     width: 100%;
     line-height: 44px;
     max-height: 44px;
@@ -77,9 +203,9 @@ i.fas.fa-cog.config-button-header:hover {
     text-decoration: none;
     list-style: unset;
     font-size: 12px;
-    font-weight: 700;
+    font-weight: 400;
 }
-.sidebar-config > ul > :hover, not .sidebar-config > ul > * :hover {
+.sidebar-config div > ul > :hover, not .sidebar-config > ul > * :hover {
     background-color: rgb(116, 116, 116);
     color: white;
     text-decoration: none;
@@ -90,19 +216,19 @@ i.fas.fa-cog.config-button-header:hover {
     margin-left: 10px;
 }
 
-.sidebar-config > ul > li > .btn-group {
+.sidebar-config > div > ul > li > .btn-group {
     margin-left: 10px;
 }
-.sidebar-config > ul > li > .btn-group > button :hover {
+.sidebar-config > div > ul > li > .btn-group > button :hover {
     background-color: rgb(24, 90, 35);
 }
 
-.sidebar-config > ul > li > .btn-group > ul > li {
+.sidebar-config > div > ul > li > .btn-group > ul > li {
     z-index: 1003;
 }
 
 .config-input {
-    max-width: 60%;
+    max-width: 35%;
     float: right;
     height: 40px;
     padding: 5px 5px;
@@ -111,3 +237,7 @@ i.fas.fa-cog.config-button-header:hover {
 .config-input :hover {
     background-color: #fff;
 }
+
+.sidebar-config > div > .btn {
+    float: right;
+} */

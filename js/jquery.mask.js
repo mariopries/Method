@@ -51,6 +51,7 @@
         "0": { pattern: /\d/ },
         "9": { pattern: /\d/, optional: true },
         "#": { pattern: /\d/, recursive: true },
+        "*": { pattern: /^[0-9]+(\.[0-9]{1,2})?$/ },
         A: { pattern: /[a-zA-Z0-9]/ },
         B: { pattern: /[a-zA-Z0-9]/, optional: true },
         S: { pattern: /[a-zA-Z]/ }

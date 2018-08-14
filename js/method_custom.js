@@ -1,5 +1,3 @@
-
-
 //-- Classes de objetos externos Method_Custom
 
 //-- Method_Custom
@@ -7,6 +5,20 @@
 let controle = false;
 
 class Method_Custom {
+    constructor() {
+        $.post("http://localhost:8080/wAuditordesenvolvimento/rest/RESTParm", (data, status) => {
+            let parms = data.ParametroConfigList;
+            let parms2 = JSON.parse(parms);
+            let parms3 = JSON.parse(parms2[0]);
+
+            this._Parms = parms3;
+        });
+    }
+
+    get Parms() {
+        return this._Parms;
+    }
+
     LoadVariable(varName) {
         let varValue = window[varName];
         return varValue;
@@ -56,15 +68,11 @@ class Method_Custom {
 
     LoaderExecute(executar) {
         if (executar) {
-            
             if (!$(".gx-mask")[0]) {
-                
                 $("body").append("<div class='gx-mask'></div>");
             }
         } else {
-            
             if ($(".gx-mask")[0]) {
-                
                 $(".gx-mask").remove();
             }
         }
@@ -119,14 +127,12 @@ class Method_Custom {
     }
 
     AlterarValorCampo(id, value) {
-        
         $(eval(id))[0].value = value;
     }
 
     AlterarValorCampoGrid(id, value) {
-        
         id = `${id}_${window.gx.currentRows.pop()}`;
-        
+
         $(eval(id))[0].value = value;
     }
 
@@ -141,10 +147,8 @@ class Method_Custom {
 
     SetFocus(fieldId) {
         if (fieldId == "prev" && lastFocused != null) {
-            
             $(lastFocused).focus();
         } else if (fieldId != null) {
-            
             let fieldToFocus = $("#" + fieldId);
             if (fieldToFocus) {
                 fieldToFocus.focus();
@@ -157,23 +161,21 @@ class Method_Custom {
     }
 
     PNotify(msgnotify) {
-
-        if (document.querySelectorAll('.ui-pnotify').length <= 1) {
+        if (document.querySelectorAll(".ui-pnotify").length <= 1) {
             eval(msgnotify);
-        }else{
-            document.querySelectorAll('.ui-pnotify')[0].firstChild.firstChild.click();
+        } else {
+            document.querySelectorAll(".ui-pnotify")[0].firstChild.firstChild.click();
         }
     }
 
-    async MakeAsync(inFunction, args) {
+    static async MakeAsync(inFunction, args) {
         return new Promise((resolve, reject) => inFunction.apply(this, args));
     }
 
-    Run(functionToRun, args) {
-        functionToRun.apply(this,args);
+    static Run(functionToRun, args) {
+        functionToRun.apply(this, args);
     }
-
-};
+}
 
 //--Method_Avatar
 
@@ -216,15 +218,13 @@ class Method_Avatar {
                             </table>
                         </div>`;
 
-            
             $("#corpoCropit").remove();
-            
+
             $("#W0015TUPLOAD").append(html);
-            
+
             $("#TUPLOAD").append(html);
         };
         let GeraCropit = () => {
-            
             $(".image-editor").cropit({
                 exportZoom: 1.25,
                 imageBackground: true,
@@ -236,11 +236,9 @@ class Method_Avatar {
             });
         };
         let EventoRolagemMouse = () => {
-            
             $(".cropit-preview").bind("mousewheel", function(event) {
                 event.preventDefault();
 
-                
                 let slider = $(".cropit-image-zoom-input");
                 let currVal = parseFloat(slider.val());
                 let increment = event.originalEvent.wheelDelta > 0 ? 0.1 : 0.1 * -1;
@@ -252,40 +250,37 @@ class Method_Avatar {
         };
         let AcaoBotoes = () => {
             //-- Rolagem da imagem a esquerda
-            
+
             $("#rotate-cw").click(function(event) {
                 event.preventDefault();
-                
+
                 $(".image-editor").cropit("rotateCW");
             });
 
             //-- Da trigger no input de type file
-            
+
             $("#selectArquivo").click(function(event) {
                 event.preventDefault();
-                
+
                 $("#uploadImagem").trigger("click");
             }),
                 //-- Rolagem da imagem a direita
-                
+
                 $("#rotate-ccw").click(function(event) {
                     event.preventDefault();
-                    
+
                     $(".image-editor").cropit("rotateCCW");
                 });
 
             //-- Aplicar e visualizar
             document.getElementById("aplicarAvatar").addEventListener("click", () => {
-                
                 let imageData = $(".image-editor").cropit("export");
                 this.ImageBase64 = imageData;
 
-                
                 gx.fx.obs.notify("Method_Avatar.SalvarAvatar");
 
-                
                 $("#previlPerfil1").remove();
-                
+
                 $("#previlPerfil2").remove();
 
                 setTimeout(function() {
@@ -295,28 +290,27 @@ class Method_Avatar {
                                         <img style="margin-top:10px;" align="middle" src="${imageData}" id="previlPerfil2" alt="Prévia do perfil" class="previa-avatar-redondo"/>
                                     </div>`;
 
-                    
                     $("#TAVATAR").append(divPrev);
 
                     setTimeout(function() {
                         //$("#previlPerfil1").fadeIn(700);
-                        
+
                         $("#previlPerfil2").fadeIn(700);
                     }, 220);
                 }, 215);
             });
 
             //-- Salvar imagem (Comunicação com GeneXus)
-            
+
             $("#salvaAvatar").click(function(event) {
                 event.preventDefault();
 
                 //-- Remove o input type file (Ocorrendo travamento da tela, então tem que ser removido pós utilizar)
-                
+
                 $("#uploadImagem").remove();
 
                 //-- Executa o comando de atualizar o avatar
-                
+
                 gx.fx.obs.notify("Method_Avatar.ExecutarAlteracao");
             });
         };
@@ -346,5 +340,63 @@ class Method_Avatar {
 class Method_Methods {
     static SetValue(EmpresaIdValue) {
         gx.fx.obs.notify("Method_Custom.ChangeEmpresa", [EmpresaIdValue]);
+    }
+
+    static async EditGrid() {
+        let gridItems = document.querySelectorAll("input.MethodEditable");
+
+        gridItems.forEach(value => {
+            Method_Methods.Mask(value);
+            value.style.setProperty("display", "inline");
+            value.style.setProperty("border", "none");
+            value.style.setProperty("font-size", "11px");
+            value.style.setProperty("border", "none");
+            value.style.setProperty("font-family", "Verdana");
+            value.style.setProperty("background-color", "transparent");
+            value.style.setProperty("padding", "0px 12px");
+            value.style.setProperty("color", "black");
+            value.nextSibling.firstChild.style.setProperty("display", "none");
+            if (value.classList.contains('MaskDate')) {
+                // value.type = 'date';
+            }
+        });
+    }
+
+    static async DoneGrid() {
+        return Method_Methods.getParms(doIt);
+
+        function doIt(parms) {
+            let gridItems = document.querySelectorAll("input.MethodEditable");
+
+            gridItems.forEach(value => {
+                let number;
+                let casasDecimais = parms.ParametroNumero;
+                if (!value.classList.contains("MaskDate")) {
+                    number = Number(value.value).toLocaleString("pt-BR", { style: "decimal", minimumFractionDigits: casasDecimais, maximumFractionDigits: casasDecimais });
+                    value.nextSibling.firstChild.innerText = number === "NaN" ? value.value : number;
+                } else {
+                    value.nextSibling.firstChild.innerText = value.value;
+                }
+                value.style.setProperty("display", "none");
+                value.nextSibling.firstChild.style.setProperty("display", "inline");
+            });
+        }
+    }
+
+    static Mask(value) {
+        const field = $(value);
+        const list = value.classList;
+
+        if (list.contains("MaskDate")) {
+            field.mask("00/00/0000");
+        }
+    }
+
+    static getParms(callback) {
+        $.post("http://localhost:8080/wAuditordesenvolvimento/rest/RESTParm", data => {
+            let parms = JSON.parse(JSON.parse(data.ParametroConfigList)[0]);
+
+            callback(parms);
+        });
     }
 }
