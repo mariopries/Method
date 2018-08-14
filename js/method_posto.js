@@ -1,19 +1,63 @@
-window.onload = () => {
+import { Files } from "./method_files.js";
+
+export function insertCode(version) {
+
     let Scripts = new Method_Scripts();
     let Styles = new Method_Styles();
-    Files[1] = Files[1].map(Styles.RemoveStyles, Styles);
-    Files[1] = Files[1].filter(value => value);
-    Styles.AppendStyles();
-    Files[0] = Files[0].map(Scripts.RemoveScripts, Scripts);
-    Files[0] = Files[0].filter(value => value);
-    Scripts.AppendScripts();
-};
 
-class Method_Scripts {
+    //Remove os styles que estão na lista
+    Files[1] = Files[1].map(Styles.RemoveStyles, Styles);
+    //Filtra apenas os valores que não são nulos
+    Files[1] = Files[1].filter(value => value);
+
+    Styles.AppendStyles();
+
+    //Remove os scripts que estão na lista
+    Files[0] = Files[0].map(Scripts.RemoveScripts, Scripts);
+    //Filtra apenas os valores que não são nulos
+    Files[0] = Files[0].filter(value => value);
+    
+    Scripts.AppendScripts(version);
+
+    return new Promise((resolve, reject) => {
+
+        try {
+
+            let selfDestruct = document.getElementById('self_destruct');
+            selfDestruct.remove(); 
+            
+        } catch (error) {
+            
+            if (confirm('Erro na inicialização da página, favor limpar o cache e atualizar a página.')) {
+                location.reload();
+            }
+
+        }
+       
+    })
+
+}
+
+export class Method_Scripts {
     constructor() {
+
         this.scripts = [
-            //-- Exclusão de arquivos
-            //-- Para rejeitar os arquivos indesejados, utilizar a syntax "nome_arquivo",
+            //-- Bibliotecas externas
+
+            // "pace-config",
+            // "pace",
+
+            // //--------------------------------
+
+            // //-- Funções Custom Method
+
+            // //--------------------------------
+
+            // //-- Arquivos Externos
+
+            // "method_ajax",
+            // "method_config_bar"
+            // //--------------------------------
         ];
     }
 
@@ -31,7 +75,7 @@ class Method_Scripts {
         }
     }
 
-    AppendScripts() {
+    AppendScripts(version = Date.now()) {
         let footer = document.createElement("footer");
 
         footer.id = "MethodFooter";
@@ -40,15 +84,19 @@ class Method_Scripts {
 
         for (let i = 0; i < Files[0].length; i++) {
             let scriptTag = document.createElement("script");
-            scriptTag.type = "text/javascript";
-            scriptTag.src = `shared/method/js/${Files[0][i]}.js`;
+            
+            scriptTag.type = Files[0][i].type;
+            
+            scriptTag.src = `shared/method/js/${Files[0][i].src}.js?v=${version}`;
+
             document.body.lastElementChild.appendChild(scriptTag);
         }
     }
 }
 
-class Method_Styles {
+export class Method_Styles {
     constructor() {
+
         this.styles = [
             //-- Inserir os styles que não devem ser inclusos
         ];
@@ -71,7 +119,7 @@ class Method_Styles {
     AppendStyles() {
         for (let i = 0; i < Files[1].length; i++) {
             let style = document.createElement("link");
-            style.href = Files[1][i];
+            style.href = `shared/method/css/${Files[1][i]}.css`;
             style.type = "text/css";
             style.rel = "stylesheet";
             document.head.appendChild(style);
