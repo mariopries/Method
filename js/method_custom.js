@@ -5,19 +5,6 @@
 let controle = false;
 
 class Method_Custom {
-    constructor() {
-        $.post("http://localhost:8080/wAuditordesenvolvimento/rest/RESTParm", (data, status) => {
-            let parms = data.ParametroConfigList;
-            let parms2 = JSON.parse(parms);
-            let parms3 = JSON.parse(parms2[0]);
-
-            this._Parms = parms3;
-        });
-    }
-
-    get Parms() {
-        return this._Parms;
-    }
 
     LoadVariable(varName) {
         let varValue = window[varName];
